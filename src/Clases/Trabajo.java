@@ -15,32 +15,42 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author nacho
+ * @author Buri
  */
 @Entity
-public class Contratacion implements Serializable {
+public class Trabajo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
     private Date fecha;
-    private int presupuesto;
-    private int cantPersonas;
-    private String descipcion;
-    @OneToOne(mappedBy = "contratacion")
-    private Trabajo trabajo;
+    private String Dir;
+    private int horas;
+    @OneToOne
+    private Contratacion contratacion;
+    @OneToOne
+    private Evento evento;
+    @OneToOne(mappedBy = "trabajo")
+    private Trabaja trabaja;
 
-    public Contratacion() {}
-    
-    public Contratacion(Date fecha, int presupuesto, int cantPersonas, String descipcion) {
-        this.fecha = fecha;
-        this.presupuesto = presupuesto;
-        this.cantPersonas = cantPersonas;
-        this.descipcion = descipcion;
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Trabajo(Date fecha, String Dir, int horas, Contratacion contratacion, Evento evento) {
+        this.fecha = fecha;
+        this.Dir = Dir;
+        this.horas = horas;
+        this.contratacion = contratacion;
+        this.evento = evento;
+    }
+    public Trabajo(){}
+    
     public Date getFecha() {
         return fecha;
     }
@@ -49,36 +59,36 @@ public class Contratacion implements Serializable {
         this.fecha = fecha;
     }
 
-    public int getPresupuesto() {
-        return presupuesto;
+    public String getDir() {
+        return Dir;
     }
 
-    public void setPresupuesto(int presupuesto) {
-        this.presupuesto = presupuesto;
+    public void setDir(String Dir) {
+        this.Dir = Dir;
     }
 
-    public int getCantPersonas() {
-        return cantPersonas;
+    public int getHoras() {
+        return horas;
     }
 
-    public void setCantPersonas(int cantPersonas) {
-        this.cantPersonas = cantPersonas;
+    public void setHoras(int horas) {
+        this.horas = horas;
     }
 
-    public String getDescipcion() {
-        return descipcion;
+    public Contratacion getContratacion() {
+        return contratacion;
     }
 
-    public void setDescipcion(String descipcion) {
-        this.descipcion = descipcion;
-    }
-    
-    public Long getId() {
-        return id;
+    public void setContratacion(Contratacion contratacion) {
+        this.contratacion = contratacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     @Override
@@ -91,10 +101,10 @@ public class Contratacion implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contratacion)) {
+        if (!(object instanceof Trabajo)) {
             return false;
         }
-        Contratacion other = (Contratacion) object;
+        Trabajo other = (Trabajo) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,7 +113,7 @@ public class Contratacion implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Contratacion[ id=" + id + " ]";
+        return "Clases.Trabajo[ id=" + id + " ]";
     }
     
 }

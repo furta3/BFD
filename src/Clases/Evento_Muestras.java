@@ -10,16 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 /**
  *
- * @author nacho
+ * @author Buri
  */
 @Entity
-public class Empleado extends Persona implements Serializable {
+public class Evento_Muestras implements Serializable {
     
-    @ManyToMany(mappedBy = "trabaja")
-    private Trabajo[] trabajos;
-    
+    private static final long serialVersionUID = 1L;
+    @Id
+    private Evento evento;
+    private Muestras muestras;
 }

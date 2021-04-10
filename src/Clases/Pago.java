@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,54 +14,60 @@ import javax.persistence.Id;
 
 /**
  *
- * @author nacho
+ * @author Buri
  */
 @Entity
-public class Muestras implements Serializable {
+public class Pago implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    private String nombre;
-    private String enlace;
-    
-    //private Foto miniatura;
-    private byte[] foto;
+    private Date fecha;
+    private int monto;
+    private Contratacion contratacion;
+    private Cliente cliente;
 
-    public byte[] getFoto() {
-        return foto;
+    public Pago(Date fecha, int monto, Contratacion contratacion, Cliente cliente) {
+        this.fecha = fecha;
+        this.monto = monto;
+        this.contratacion = contratacion;
+        this.cliente = cliente;
+    }
+    public Pago(){}
+
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getMonto() {
+        return monto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMonto(int monto) {
+        this.monto = monto;
     }
 
-    public String getEnlace() {
-        return enlace;
+    public Contratacion getContratacion() {
+        return contratacion;
     }
 
-    public void setEnlace(String enlace) {
-        this.enlace = enlace;
+    public void setContratacion(Contratacion contratacion) {
+        this.contratacion = contratacion;
     }
 
-    public Muestras(String nombre, String enlace, byte[] foto) {
-        this.nombre = nombre;
-        this.enlace = enlace;
-        this.foto = foto;
+    public Cliente getCliente() {
+        return cliente;
     }
-  
-    public Muestras(){}
-            
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
     public Long getId() {
         return id;
     }
@@ -68,6 +75,7 @@ public class Muestras implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+   
 
     @Override
     public int hashCode() {
@@ -79,10 +87,10 @@ public class Muestras implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Muestras)) {
+        if (!(object instanceof Pago)) {
             return false;
         }
-        Muestras other = (Muestras) object;
+        Pago other = (Pago) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -91,7 +99,7 @@ public class Muestras implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Muestras[ id=" + id + " ]";
+        return "Clases.Pago[ id=" + id + " ]";
     }
     
 }
