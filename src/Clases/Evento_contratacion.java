@@ -6,21 +6,18 @@
 package Clases;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 /**
  *
  * @author nacho
  */
 @Entity
-public class Empleado extends Persona implements Serializable {
+public class Evento_contratacion implements Serializable {
     
-
-    private List<Trabajo> trabajos;
-    
+    private Contratacion contratacion;
+    private Evento evento;
 }

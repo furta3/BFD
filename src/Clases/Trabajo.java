@@ -7,10 +7,12 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -27,12 +29,18 @@ public class Trabajo implements Serializable {
     private Date fecha;
     private String Dir;
     private int horas;
+    //@ManyToMany(mappedBy = "Trabaja")
+    
+    private List<Empleado> empleados;
+    
+    /*
     @OneToOne
     private Contratacion contratacion;
     @OneToOne
     private Evento evento;
     @OneToOne(mappedBy = "trabajo")
     private Trabaja trabaja;
+    */
 
     public Long getId() {
         return id;
@@ -42,7 +50,7 @@ public class Trabajo implements Serializable {
         this.id = id;
     }
 
-    public Trabajo(Date fecha, String Dir, int horas, Contratacion contratacion, Evento evento) {
+    /*public Trabajo(Date fecha, String Dir, int horas, Contratacion contratacion, Evento evento) {
         this.fecha = fecha;
         this.Dir = Dir;
         this.horas = horas;
@@ -89,7 +97,7 @@ public class Trabajo implements Serializable {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
-    }
+    }*/
 
     @Override
     public int hashCode() {

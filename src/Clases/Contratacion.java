@@ -31,6 +31,7 @@ public class Contratacion implements Serializable {
     private String descipcion;
     @OneToOne(mappedBy = "contratacion")
     private Trabajo trabajo;
+    private Evento even;
 
     public Contratacion() {}
     

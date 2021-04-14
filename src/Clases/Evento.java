@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Evento implements Serializable {
     @OneToOne(mappedBy = "evento")
     private Trabajo trabajo; 
     
+    private List<Contratacion> contrataciones;
 
     public String getNombre() {
         return nombre;
