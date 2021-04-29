@@ -6,10 +6,12 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -28,6 +30,17 @@ public class Muestras implements Serializable {
     
     //private Foto miniatura;
     private byte[] foto;
+
+    public List<Evento> getEventos() {
+        return Eventos;
+    }
+
+    public void setEventos(List<Evento> Eventos) {
+        this.Eventos = Eventos;
+    }
+    
+    @ManyToMany
+    private List<Evento> Eventos;
 
     public byte[] getFoto() {
         return foto;

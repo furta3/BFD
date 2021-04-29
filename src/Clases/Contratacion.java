@@ -7,11 +7,15 @@ package Clases;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+
 
 /**
  *
@@ -25,13 +29,34 @@ public class Contratacion implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private int presupuesto;
     private int cantPersonas;
     private String descipcion;
-    @OneToOne(mappedBy = "contratacion")
-    private Trabajo trabajo;
-    private Evento even;
+
+    @ManyToOne
+    private Clientes cliente;
+    
+    @OneToMany(mappedBy = "contratacion")
+    private List<Trabajo> trabajos;
+    
+
+    public List<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+    }
+
+    public Clientes getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Clientes cliente) {
+        this.cliente = cliente;
+    }
 
     public Contratacion() {}
     

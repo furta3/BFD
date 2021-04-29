@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -23,16 +25,16 @@ public class Pago implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private int monto;
+    @ManyToOne
     private Contratacion contratacion;
-    private Cliente cliente;
 
-    public Pago(Date fecha, int monto, Contratacion contratacion, Cliente cliente) {
+    public Pago(Date fecha, int monto, Contratacion contratacion) {
         this.fecha = fecha;
         this.monto = monto;
         this.contratacion = contratacion;
-        this.cliente = cliente;
     }
     public Pago(){}
 
@@ -58,14 +60,6 @@ public class Pago implements Serializable {
 
     public void setContratacion(Contratacion contratacion) {
         this.contratacion = contratacion;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public Long getId() {

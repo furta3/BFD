@@ -8,10 +8,10 @@ package Clases;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 
 /**
  *
@@ -20,13 +20,30 @@ import javax.persistence.OneToOne;
 @Entity
 public class Evento implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @Id
     private String nombre;
-    @OneToOne(mappedBy = "evento")
-    private Trabajo trabajo; 
     
-    private List<Contratacion> contrataciones;
+    @OneToMany(mappedBy = "evento")
+    private List<Trabajo> trabajos;
+    @ManyToMany(mappedBy = "Eventos")
+    private List<Muestras> muestras_evento;
+
+    public List<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+    }
+
+    public List<Muestras> getMuestras_evento() {
+        return muestras_evento;
+    }
+
+    public void setMuestras_evento(List<Muestras> muestras_evento) {
+        this.muestras_evento = muestras_evento;
+    }
 
     public String getNombre() {
         return nombre;

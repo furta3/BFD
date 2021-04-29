@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -19,13 +19,19 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Trabaja implements Serializable {
 
+    @ManyToOne
+    private Empleado empleado;
+    
+    @ManyToOne
+    private Trabajo trabajo;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int sueldo;
     private boolean pago;
-    private Trabajo trabajo;
+
 
     @Override
     public int hashCode() {
@@ -45,6 +51,46 @@ public class Trabaja implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
+
+    public Trabajo getTrabajo() {
+        return trabajo;
+    }
+
+    public void setTrabajo(Trabajo trabajo) {
+        this.trabajo = trabajo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getSueldo() {
+        return sueldo;
+    }
+
+    public void setSueldo(int sueldo) {
+        this.sueldo = sueldo;
+    }
+
+    public boolean isPago() {
+        return pago;
+    }
+
+    public void setPago(boolean pago) {
+        this.pago = pago;
     }
 
     @Override

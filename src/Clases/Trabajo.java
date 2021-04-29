@@ -13,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -22,43 +24,59 @@ import javax.persistence.OneToOne;
 @Entity
 public class Trabajo implements Serializable {
 
+    @ManyToOne
+    private Contratacion contratacion;
+
+    @ManyToOne
+    private Evento evento;
+
+    @ManyToMany(mappedBy = "trabajos")
+    private List<Servicio> servicios;
+
+    @OneToMany(mappedBy = "trabajo")
+    private List<Trabaja> trabajos;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fecha;
     private String Dir;
     private int horas;
-    //@ManyToMany(mappedBy = "Trabaja")
-    
-    private List<Empleado> empleados;
-    
-    /*
-    @OneToOne
-    private Contratacion contratacion;
-    @OneToOne
-    private Evento evento;
-    @OneToOne(mappedBy = "trabajo")
-    private Trabaja trabaja;
-    */
+    private int presupuesto;
 
-    public Long getId() {
-        return id;
+    public Contratacion getContratacion() {
+        return contratacion;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    /*public Trabajo(Date fecha, String Dir, int horas, Contratacion contratacion, Evento evento) {
-        this.fecha = fecha;
-        this.Dir = Dir;
-        this.horas = horas;
+    public void setContratacion(Contratacion contratacion) {
         this.contratacion = contratacion;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
         this.evento = evento;
     }
-    public Trabajo(){}
-    
+
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
+    public List<Trabaja> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabaja> trabajos) {
+        this.trabajos = trabajos;
+    }
+
     public Date getFecha() {
         return fecha;
     }
@@ -83,21 +101,22 @@ public class Trabajo implements Serializable {
         this.horas = horas;
     }
 
-    public Contratacion getContratacion() {
-        return contratacion;
+    public int getPresupuesto() {
+        return presupuesto;
     }
 
-    public void setContratacion(Contratacion contratacion) {
-        this.contratacion = contratacion;
+    public void setPresupuesto(int presupuesto) {
+        this.presupuesto = presupuesto;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public Long getId() {
+        return id;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }*/
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 
     @Override
     public int hashCode() {

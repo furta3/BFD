@@ -6,10 +6,10 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -18,9 +18,20 @@ import javax.persistence.Id;
 @Entity
 public class Servicio implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     @Id
     private String tipo;
+    
+    @ManyToMany
+    private List<Trabajo> trabajos;
+
+    public List<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+    }
 
     public Servicio(String tipo) {
         this.tipo = tipo;
