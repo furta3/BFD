@@ -146,7 +146,7 @@ public class AgregarCliente extends javax.swing.JFrame {
         cli.setDir(tbDireccion.getText());
         cli.setEmail(tbEmail.getText());
         
-        Conexion.getInstance();//.persist(cli);
+        Conexion.getInstance().persist(cli);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
