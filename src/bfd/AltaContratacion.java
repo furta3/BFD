@@ -5,17 +5,29 @@
  */
 package bfd;
 
+import BD.Conexion;
+import Clases.Clientes;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author nacho
  */
 public class AltaContratacion extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AltaContratacion
-     */
+
     public AltaContratacion() {
         initComponents();
+        
+        List<Clientes> cli;
+        cli = Conexion.getInstance().listaEspecies();
+        DefaultComboBoxModel dcm = new DefaultComboBoxModel();
+        for(Clientes cliente: cli){
+            dcm.addElement(cliente);
+            //cbClientes.addItem(cliente.getApellido());
+        }
+        cbClientes.setModel(dcm);
     }
 
     /**
@@ -51,8 +63,6 @@ public class AltaContratacion extends javax.swing.JPanel {
 
         jLabel3.setText("Descripción:");
 
-        cbClientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Cliente:");
 
         btnNuevoCliente.setText("Nuevo");
@@ -63,6 +73,11 @@ public class AltaContratacion extends javax.swing.JPanel {
         });
 
         btnAceptar.setText("Agregar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -130,6 +145,15 @@ public class AltaContratacion extends javax.swing.JPanel {
         AgregarCliente ac = new AgregarCliente();
         
     }//GEN-LAST:event_btnNuevoClienteActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+        List<Clientes> cli;
+        cli = Conexion.getInstance().listaEspecies();
+        for(Clientes cliente: cli){
+            cbClientes.addItem(cliente.getApellido());
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
