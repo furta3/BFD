@@ -58,4 +58,11 @@ public class Clientes extends Persona implements Serializable {
     public void setDir(String dir) {
         this.dir = dir;
     }
+
+    @Override
+    public String toString() {
+        return super.getNombre() + " " +super.getApellido();
+    }
+    
+    
 }
