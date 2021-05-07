@@ -42,6 +42,11 @@ public class AgregarCliente extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tbNombre.setText("Nombre");
+        tbNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbNombreActionPerformed(evt);
+            }
+        });
 
         tbApellido.setText("Apellido");
 
@@ -148,6 +153,10 @@ public class AgregarCliente extends javax.swing.JFrame {
         
         Conexion.getInstance().persist(cli);
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void tbNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbNombreActionPerformed
 
     /**
      * @param args the command line arguments
