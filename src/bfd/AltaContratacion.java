@@ -7,6 +7,8 @@ package bfd;
 
 import BD.Conexion;
 import Clases.Clientes;
+import Clases.Contratacion;
+import static java.lang.Integer.parseInt;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -52,6 +54,8 @@ public class AltaContratacion extends javax.swing.JPanel {
         btnNuevoCliente = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel1.setText("Fecha:");
 
@@ -107,15 +111,16 @@ public class AltaContratacion extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnNuevoCliente))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addComponent(btnCancelar)
                         .addGap(41, 41, 41)
                         .addComponent(btnAceptar)))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -148,11 +153,13 @@ public class AltaContratacion extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        List<Clientes> cli;
-        cli = Conexion.getInstance().listaEspecies();
-        for(Clientes cliente: cli){
-            cbClientes.addItem(cliente.getApellido());
-        }
+        Contratacion con = new Contratacion();
+        con.setFecha(dcFecha.getDate());
+        con.setCantPersonas(parseInt(sPersonas.getValue().toString()));
+        con.setCliente((Clientes) cbClientes.getSelectedItem());
+        con.setDescipcion(taDescripcion.getText());
+        
+        Conexion.getInstance().persist(con);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 

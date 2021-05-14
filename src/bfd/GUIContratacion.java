@@ -2,9 +2,9 @@
 package bfd;
 
 
-public class Contratacion extends javax.swing.JPanel {
+public class GUIContratacion extends javax.swing.JPanel {
 
-    public Contratacion() {
+    public GUIContratacion() {
         initComponents();
         
     }
