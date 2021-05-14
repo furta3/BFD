@@ -21,7 +21,6 @@ public class Conexion {
     public static Conexion getInstance() {
         return ConexionHolder.INSTANCE;
     }
-    
     private static class ConexionHolder {
         private static final Conexion INSTANCE = new Conexion();
         private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("BFDPU");
