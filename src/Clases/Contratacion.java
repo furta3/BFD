@@ -33,7 +33,7 @@ public class Contratacion implements Serializable {
     private Date fecha;
     private int presupuesto;
     private int cantPersonas;
-    private String descipcion;
+    private String descripcion;
 
     @ManyToOne
     private Clientes cliente;
@@ -64,7 +64,7 @@ public class Contratacion implements Serializable {
         this.fecha = fecha;
         this.presupuesto = presupuesto;
         this.cantPersonas = cantPersonas;
-        this.descipcion = descipcion;
+        this.descripcion = descipcion;
     }
 
     public Date getFecha() {
@@ -92,11 +92,11 @@ public class Contratacion implements Serializable {
     }
 
     public String getDescipcion() {
-        return descipcion;
+        return descripcion;
     }
 
     public void setDescipcion(String descipcion) {
-        this.descipcion = descipcion;
+        this.descripcion = descipcion;
     }
     
     public Long getId() {
@@ -129,7 +129,7 @@ public class Contratacion implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Contratacion[ id=" + id + " ]";
+        return descripcion;
     }
     
 }

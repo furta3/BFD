@@ -1,12 +1,37 @@
 
 package bfd;
 
-public class Contrataciones extends javax.swing.JPanel {
+import BD.Conexion;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+import Clases.Contratacion;
+import java.text.SimpleDateFormat;
 
+public class Contrataciones extends javax.swing.JPanel {
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    
     public Contrataciones() {
         initComponents();
+        CargarContrataciones();
     }
-
+    
+    public void CargarContrataciones(){
+        Iterator<Contratacion> it = Conexion.getInstance().getContrataciones().iterator();
+                DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
+                while (it.hasNext()) {
+                    Contratacion c = it.next();
+                    //if (c.isActivo()) {  los booleanos van en la consulata de mwsql
+                        Object[] fila = new Object[5];
+                        fila[0] = sdf.format(c.getFecha());
+                        fila[1] = c.getCliente().getApellido();
+                        fila[2] = c.getCantPersonas();
+                        fila[3] = c.getPresupuesto();
+                        fila[4] = c;
+                        mdl.addRow(fila);
+                    //}
+                }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -16,14 +41,11 @@ public class Contrataciones extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(600, 332));
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
         tContrataciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Fecha", "Cliente", "Personas", "Presupuesto", "Descripción"
@@ -50,7 +72,7 @@ public class Contrataciones extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(44, 44, 44)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -61,9 +83,9 @@ public class Contrataciones extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBuscar)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+                .addGap(27, 27, 27))
         );
     }// </editor-fold>//GEN-END:initComponents
 
