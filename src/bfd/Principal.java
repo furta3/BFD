@@ -16,7 +16,9 @@ import java.awt.Container;
 import java.awt.PopupMenu;
 public class Principal extends javax.swing.JFrame {
 
-
+    AltaContratacion altaCon;
+    Contrataciones con;
+    
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -31,8 +33,7 @@ public class Principal extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         btnNuevoTrabajo = new javax.swing.JButton();
         btnSerEve = new javax.swing.JButton();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
+        ifPane = new javax.swing.JInternalFrame();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,25 +55,16 @@ public class Principal extends javax.swing.JFrame {
 
         btnSerEve.setText("Servicios y eventos");
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
+        ifPane.setVisible(true);
 
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+        javax.swing.GroupLayout ifPaneLayout = new javax.swing.GroupLayout(ifPane.getContentPane());
+        ifPane.getContentPane().setLayout(ifPaneLayout);
+        ifPaneLayout.setHorizontalGroup(
+            ifPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 590, Short.MAX_VALUE)
         );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        ifPaneLayout.setVerticalGroup(
+            ifPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -83,12 +75,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnContrataciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
                     .addComponent(btnNuevoTrabajo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSerEve, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLayeredPane1))
+                    .addComponent(btnSerEve, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(ifPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,32 +92,33 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSerEve, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLayeredPane2)
+                .addGap(165, 165, 165))
+            .addComponent(ifPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
-        AltaContratacion altaCon = new AltaContratacion();
+        altaCon = new AltaContratacion();
         altaCon.setVisible(true);
-        jLayeredPane2.add(altaCon); //.removeAll();
-        jLayeredPane2.setComponentZOrder(altaCon, 0);
-        jLayeredPane2.repaint();
-        //jPanel1.add(altaCon);
+        //jPanel1.removeAll();
+        this.add(altaCon);
+        ifPane.add(altaCon);
+        ifPane.repaint();
+        this.repaint();
+        //jPanel1.setVisible(true);
+        //jPanel1.repaint();
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
-        Contrataciones con = new Contrataciones();
-        con.setVisible(true);
-        jLayeredPane2.add(con);
-        jLayeredPane2.setComponentZOrder(con, 0);
-        jLayeredPane2.repaint();
-        /*jPanel1.removeAll();
-        jPanel1.add(con);
-        jPanel1.repaint();*/
+        con = new Contrataciones();
+        //con.setVisible(true);
+        
+        //jPanel1.removeAll();
+        //jPanel1 = con;
+        //jPanel1.setVisible(true);
+        //jPanel1.repaint();
     }//GEN-LAST:event_btnContratacionesActionPerformed
 
     public static void main(String args[]) {
@@ -165,8 +157,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnContrataciones;
     private javax.swing.JButton btnNuevoTrabajo;
     private javax.swing.JButton btnSerEve;
+    private javax.swing.JInternalFrame ifPane;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JLayeredPane jLayeredPane2;
     // End of variables declaration//GEN-END:variables
 }

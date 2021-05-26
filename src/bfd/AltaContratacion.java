@@ -30,6 +30,7 @@ public class AltaContratacion extends javax.swing.JPanel {
             //cbClientes.addItem(cliente.getApellido());
         }
         cbClientes.setModel(dcm);
+        this.setVisible(true);
     }
 
     /**

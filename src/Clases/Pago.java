@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -93,7 +94,7 @@ public class Pago implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Pago[ id=" + id + " ]";
+        return Integer.toString(monto);
     }
     
 }

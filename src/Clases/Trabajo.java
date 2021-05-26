@@ -44,6 +44,16 @@ public class Trabajo implements Serializable {
     private String Dir;
     private int horas;
     private int presupuesto;
+    @ManyToOne
+    private Localidad localidad;
+
+    public Localidad getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(Localidad localidad) {
+        this.localidad = localidad;
+    }
 
     public Contratacion getContratacion() {
         return contratacion;
@@ -140,7 +150,6 @@ public class Trabajo implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Trabajo[ id=" + id + " ]";
+        return fecha.getDay()+"/"+fecha.getMonth()+"/"+fecha.getYear();
     }
-    
 }
