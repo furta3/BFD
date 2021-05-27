@@ -7,6 +7,8 @@ package BD;
 
 import Clases.Clientes;
 import Clases.Contratacion;
+import Clases.Evento;
+import Clases.Localidad;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -110,6 +112,35 @@ public class Conexion {
         }
         return lista;
     }
+    
+    public List<Evento> getEventos(){
+        EntityManager em = getEntity();
+        List<Evento> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM evento", Evento.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
+    public List<Localidad> getLocalidades(){
+        EntityManager em = getEntity();
+        List<Localidad> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM localidad", Localidad.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
     
     public Clientes getCliente(int id){
         EntityManager em = getEntity();

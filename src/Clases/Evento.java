@@ -28,6 +28,15 @@ public class Evento implements Serializable {
     private List<Trabajo> trabajos;
     @ManyToMany(mappedBy = "Eventos")
     private List<Muestras> muestras_evento;
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public List<Trabajo> getTrabajos() {
         return trabajos;
@@ -53,9 +62,15 @@ public class Evento implements Serializable {
         this.nombre = nombre;
     }
 
-    public Evento(String nombre) {
+    public Evento(String nombre,boolean vigente) {
         this.nombre = nombre;
+        this.vigente = vigente;
     }
 
     public Evento(){}
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

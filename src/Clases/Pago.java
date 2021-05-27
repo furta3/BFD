@@ -6,6 +6,7 @@
 package Clases;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,6 +31,15 @@ public class Pago implements Serializable {
     private int monto;
     @ManyToOne
     private Contratacion contratacion;
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public Pago(Date fecha, int monto, Contratacion contratacion) {
         this.fecha = fecha;
@@ -93,7 +103,7 @@ public class Pago implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Pago[ id=" + id + " ]";
+        return Integer.toString(monto);
     }
     
 }

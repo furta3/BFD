@@ -34,6 +34,33 @@ public class Contratacion implements Serializable {
     private int presupuesto;
     private int cantPersonas;
     private String descripcion;
+    @OneToMany(mappedBy = "contratacion")
+    private List<Pago> pagos; 
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
+    
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public List<Pago> getPagos() {
+        return pagos;
+    }
+
+    public void setPagos(List<Pago> pagos) {
+        this.pagos = pagos;
+    }
 
     @ManyToOne
     private Clientes cliente;

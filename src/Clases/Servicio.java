@@ -24,6 +24,15 @@ public class Servicio implements Serializable {
     
     @ManyToMany
     private List<Trabajo> trabajos;
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public List<Trabajo> getTrabajos() {
         return trabajos;
