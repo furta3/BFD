@@ -46,6 +46,15 @@ public class Trabajo implements Serializable {
     private int presupuesto;
     @ManyToOne
     private Localidad localidad;
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public Localidad getLocalidad() {
         return localidad;

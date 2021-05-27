@@ -31,6 +31,15 @@ public class Pago implements Serializable {
     private int monto;
     @ManyToOne
     private Contratacion contratacion;
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public Pago(Date fecha, int monto, Contratacion contratacion) {
         this.fecha = fecha;

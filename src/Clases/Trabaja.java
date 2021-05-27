@@ -31,7 +31,15 @@ public class Trabaja implements Serializable {
     private Long id;
     private int sueldo;
     private boolean pago;
+    private boolean vigente;
 
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     @Override
     public int hashCode() {

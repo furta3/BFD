@@ -23,6 +23,23 @@ public class Localidad implements Serializable {
     private String nombre;
     @OneToMany(mappedBy = "localidad")
     private List<Trabajo> trabajos;
+    private boolean vigente;
+
+    public List<Trabajo> getTrabajos() {
+        return trabajos;
+    }
+
+    public void setTrabajos(List<Trabajo> trabajos) {
+        this.trabajos = trabajos;
+    }
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public String getNombre() {
         return nombre;
@@ -32,8 +49,14 @@ public class Localidad implements Serializable {
         this.nombre = nombre;
     }
 
-    public Localidad(String nombre) {
+    public Localidad(String nombre,boolean vigente) {
         this.nombre = nombre;
+        this.vigente = vigente;
     }
     public Localidad(){}
+    
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

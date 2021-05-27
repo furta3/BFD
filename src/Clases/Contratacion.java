@@ -36,7 +36,16 @@ public class Contratacion implements Serializable {
     private String descripcion;
     @OneToMany(mappedBy = "contratacion")
     private List<Pago> pagos; 
+    private boolean vigente;
 
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
+    
     public String getDescripcion() {
         return descripcion;
     }
