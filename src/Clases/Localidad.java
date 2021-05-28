@@ -53,6 +53,9 @@ public class Localidad implements Serializable {
         this.nombre = nombre;
         this.vigente = vigente;
     }
+    public Localidad(String nombre){
+        this.nombre =  nombre;
+    }
     public Localidad(){}
     
     @Override

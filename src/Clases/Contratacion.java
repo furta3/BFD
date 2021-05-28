@@ -117,14 +117,6 @@ public class Contratacion implements Serializable {
     public void setCantPersonas(int cantPersonas) {
         this.cantPersonas = cantPersonas;
     }
-
-    public String getDescipcion() {
-        return descripcion;
-    }
-
-    public void setDescipcion(String descipcion) {
-        this.descripcion = descipcion;
-    }
     
     public Long getId() {
         return id;

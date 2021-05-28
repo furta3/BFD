@@ -36,7 +36,7 @@ public class GUIContratacionJF extends javax.swing.JFrame {
     public void load(){
         tfCliente.setText(con.getCliente().getApellido());
         dcFecha.setDate(con.getFecha());
-        taDesc.setText(con.getDescipcion());
+        taDesc.setText(con.getDescripcion());
         sPresupuesto.setValue(con.getPresupuesto());
         
     }
@@ -48,15 +48,15 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         mdl.setRowCount(0);
         while (it.hasNext()) {
             Trabajo c = it.next();
-        //if (c.isActivo()) {  los booleanos van en la consulata de mwsql
-            Object[] fila = new Object[5];
-            fila[0] = c;
-            fila[1] = c.getLocalidad().getNombre();
-            fila[2] = c.getDir();
-            fila[3] = c.getHoras();
-            fila[4] = c.getPresupuesto();
-            mdl.addRow(fila);
-        //}
+            if (c.isVigente()) {
+                Object[] fila = new Object[5];
+                fila[0] = c;
+                fila[1] = c.getLocalidad().getNombre();
+                fila[2] = c.getDir();
+                fila[3] = c.getHoras();
+                fila[4] = c.getPresupuesto();
+                mdl.addRow(fila);
+            }
         }
     }
     
@@ -67,12 +67,12 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         mdl.setRowCount(0);
         while (it.hasNext()) {
             Pago c = it.next();
-        //if (c.isActivo()) {  los booleanos van en la consulata de mwsql
-            Object[] fila = new Object[2];
-            fila[0] = sdf.format(c.getFecha());
-            fila[1] = c;
-            mdl.addRow(fila);
-        //}
+            if (c.isVigente()) { 
+                Object[] fila = new Object[2];
+                fila[0] = sdf.format(c.getFecha());
+                fila[1] = c;
+                mdl.addRow(fila);
+            }
         }
     }
     public void asd(){}
@@ -149,6 +149,11 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         });
 
         btnEliminarPago.setText("Eliminar");
+        btnEliminarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPagoActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Contratación");
 
@@ -165,6 +170,11 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         jScrollPane4.setViewportView(tTrabajos);
 
         btnGuardarPresupuesto.setText("Guardar");
+        btnGuardarPresupuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPresupuestoActionPerformed(evt);
+            }
+        });
 
         btnNuevoTrabajo.setText("Nuevo");
         btnNuevoTrabajo.addActionListener(new java.awt.event.ActionListener() {
@@ -307,12 +317,33 @@ public class GUIContratacionJF extends javax.swing.JFrame {
     private void btnEliminarTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTrabajoActionPerformed
         // TODO add your handling code here:
         Trabajo tr;
-        if(tTrabajos.getSelectedRow()>0){
+        if(tTrabajos.getSelectedRow()==0){
             tr = (Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0);
-            
+            tr.setVigente(false);
+            Conexion.getInstance().merge(tr);
+            cargarTrabajos();
         }
             
     }//GEN-LAST:event_btnEliminarTrabajoActionPerformed
+
+    private void btnEliminarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPagoActionPerformed
+        // TODO add your handling code here:
+        Pago p;
+        if(tPagos.getSelectedRow()==0){
+            p = (Pago) tPagos.getValueAt(tPagos.getSelectedRow(), 1);
+            p.setVigente(false);
+            Conexion.getInstance().merge(p);
+            cargarPagos();
+        }
+    }//GEN-LAST:event_btnEliminarPagoActionPerformed
+
+    private void btnGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPresupuestoActionPerformed
+        // TODO add your handling code here:
+        con.setDescripcion(taDesc.getText());
+        con.setPresupuesto((int) sPresupuesto.getValue());
+        con.setFecha(dcFecha.getDate());
+        Conexion.getInstance().merge(con);
+    }//GEN-LAST:event_btnGuardarPresupuestoActionPerformed
 
     /**
      * @param args the command line arguments

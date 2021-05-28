@@ -158,7 +158,7 @@ public class AltaContratacion extends javax.swing.JPanel {
         con.setFecha(dcFecha.getDate());
         con.setCantPersonas(parseInt(sPersonas.getValue().toString()));
         con.setCliente((Clientes) cbClientes.getSelectedItem());
-        con.setDescipcion(taDescripcion.getText());
+        con.setDescripcion(taDescripcion.getText());
         con.setVigente(true);
         
         Conexion.getInstance().persist(con);

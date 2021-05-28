@@ -257,6 +257,7 @@ public class AltaTrabajo extends javax.swing.JPanel {
         tr.setVigente(true);
         Conexion.getInstance().persist(tr);
         jf.cargarTrabajos();
+        this.setVisible(false);//no se como cerrar ventanas
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cbEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEventosActionPerformed

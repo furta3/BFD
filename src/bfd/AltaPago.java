@@ -123,11 +123,13 @@ public class AltaPago extends javax.swing.JPanel {
         p.setVigente(true);
         Conexion.getInstance().persist(p);
         FR.cargarPagos();
+        
+        this.setVisible(false);//no se como cerrar ventanas
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        this.setVisible(false);//no se como cerrar ventanas
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
