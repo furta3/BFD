@@ -24,7 +24,8 @@ public class ABMDatos extends javax.swing.JPanel {
         DefaultListModel dlm = new DefaultListModel();
         dlm.clear();
         for(Evento evento: evn){
-            dlm.addElement(evento);
+            if(evento.isVigente())
+                dlm.addElement(evento);
         }
         jLista.setModel(dlm);
     }
@@ -33,7 +34,8 @@ public class ABMDatos extends javax.swing.JPanel {
         DefaultListModel dlm = new DefaultListModel();
         dlm.clear();
         for(Localidad localidad: loc){
-            dlm.addElement(localidad);
+            if(localidad.isVigente())
+                dlm.addElement(localidad);
         }
         jLista.setModel(dlm);
     }
@@ -142,17 +144,17 @@ public class ABMDatos extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        if(jLista.getSelectedIndex()==0){
+        if(jLista.getSelectedIndex()>=0){
             if(cbOpcion.getSelectedIndex()==0){
-                System.out.println("localidad = "+(String) jLista.getSelectedValue());
-                Localidad l = Conexion.getInstance().getLocalidad((String) jLista.getSelectedValue());
+                //System.out.println("localidad = "+jLista.getSelectedValue());
+                Localidad l = (Localidad) jLista.getSelectedValue();
                 l.setVigente(false);
                 Conexion.getInstance().merge(l);
                 cargarLocalidades();
             }
             else{
-                System.out.println("evento = "+ (String)jLista.getSelectedValue());
-                Evento e = Conexion.getInstance().getEvento((String)jLista.getSelectedValue());
+                //System.out.println("evento = "+ (String) jLista.getSelectedValue());
+                Evento e = (Evento) jLista.getSelectedValue();
                 e.setVigente(false);
                 Conexion.getInstance().merge(e);
                 cargarEventos();
@@ -166,7 +168,7 @@ public class ABMDatos extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cbOpcion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jLista;
+    private javax.swing.JList<Object> jLista;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField tfNuevo;
     // End of variables declaration//GEN-END:variables
