@@ -29,6 +29,15 @@ public class Persona implements Serializable {
     private String nombre;
     private String apellido;
     private String telefono;
+    private boolean vigente;
+
+    public boolean isVigente() {
+        return vigente;
+    }
+
+    public void setVigente(boolean vigente) {
+        this.vigente = vigente;
+    }
 
     public Persona(String nombre, String apellido, String telefono) {
         this.nombre = nombre;
