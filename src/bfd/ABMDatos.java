@@ -13,8 +13,6 @@ public class ABMDatos extends javax.swing.JPanel {
     List<Evento> evn;
     public ABMDatos() {
         initComponents();
-        loc = Conexion.getInstance().getLocalidades();
-        evn = Conexion.getInstance().getEventos();
         if(cbOpcion.getSelectedIndex()==0)
             cargarLocalidades();
         else
@@ -22,7 +20,7 @@ public class ABMDatos extends javax.swing.JPanel {
     }
     
     public void cargarEventos(){
-        Conexion.getInstance().refresh(evn);
+        evn = Conexion.getInstance().getEventos();
         DefaultListModel dlm = new DefaultListModel();
         dlm.clear();
         for(Evento evento: evn){
@@ -31,7 +29,7 @@ public class ABMDatos extends javax.swing.JPanel {
         jLista.setModel(dlm);
     }
     public void cargarLocalidades(){
-        Conexion.getInstance().refresh(loc);
+        loc = Conexion.getInstance().getLocalidades();
         DefaultListModel dlm = new DefaultListModel();
         dlm.clear();
         for(Localidad localidad: loc){
@@ -69,6 +67,11 @@ public class ABMDatos extends javax.swing.JPanel {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Nuevo:");
 
@@ -85,9 +88,8 @@ public class ABMDatos extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(cbOpcion, javax.swing.GroupLayout.Alignment.LEADING, 0, 166, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(cbOpcion, 0, 166, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(42, 42, 42))
         );
         layout.setVerticalGroup(
@@ -125,13 +127,38 @@ public class ABMDatos extends javax.swing.JPanel {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         if(!tfNuevo.getText().equals("")){
-            if(cbOpcion.getSelectedIndex()==0)
-                Conexion.getInstance().persist(new Localidad(tfNuevo.getText(),true));
-            else
+            if(cbOpcion.getSelectedIndex()==0){
+               Conexion.getInstance().persist(new Localidad(tfNuevo.getText(),true));
+               cargarLocalidades();
+            } 
+            else{
                 Conexion.getInstance().persist(new Evento(tfNuevo.getText(),true));
+                cargarEventos();
+            }
+                
         }
 
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        if(jLista.getSelectedIndex()==0){
+            if(cbOpcion.getSelectedIndex()==0){
+                System.out.println("localidad = "+(String) jLista.getSelectedValue());
+                Localidad l = Conexion.getInstance().getLocalidad((String) jLista.getSelectedValue());
+                l.setVigente(false);
+                Conexion.getInstance().merge(l);
+                cargarLocalidades();
+            }
+            else{
+                System.out.println("evento = "+ (String)jLista.getSelectedValue());
+                Evento e = Conexion.getInstance().getEvento((String)jLista.getSelectedValue());
+                e.setVigente(false);
+                Conexion.getInstance().merge(e);
+                cargarEventos();
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

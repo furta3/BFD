@@ -159,4 +159,29 @@ public class Conexion {
         }
         return s;
     }
+    
+    public Evento getEvento(String nombre){
+        EntityManager em = getEntity();
+        Evento ev = null;
+        try{
+            ev = em.find(Evento.class, nombre);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return ev;
+    }
+    public Localidad getLocalidad(String nombre){
+        EntityManager em = getEntity();
+        Localidad loc = null;
+        try{
+            loc = em.find(Localidad.class, nombre);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return loc;
+    }
 }

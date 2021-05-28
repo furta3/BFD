@@ -66,7 +66,9 @@ public class Evento implements Serializable {
         this.nombre = nombre;
         this.vigente = vigente;
     }
-
+    public Evento(String nombre){
+        this.nombre=nombre;
+    }
     public Evento(){}
     
     @Override
