@@ -19,6 +19,7 @@ public class Principal extends javax.swing.JFrame {
     AltaContratacion altaCon;
     Contrataciones con;
     
+    
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
