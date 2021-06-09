@@ -15,7 +15,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.PopupMenu;
 public class Principal extends javax.swing.JFrame {
-
+    
     AltaContratacion altaCon;
     Contrataciones con;
     
@@ -58,6 +58,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton2.setText("Clientes y Empleados");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btnNuevoTrabajo.setText("Nuevo trabajo");
         btnNuevoTrabajo.addActionListener(new java.awt.event.ActionListener() {
@@ -111,15 +116,16 @@ public class Principal extends javax.swing.JFrame {
         altaCon.setVisible(true);
         jPanel1.removeAll();
         jPanel1.add(altaCon);
-        jPanel1.setVisible(true);
+        //jPanel1.setVisible(true);
         jPanel1.repaint();
+        jPanel1.revalidate();
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
         con = new Contrataciones();
         con.setVisible(true);
         jPanel1.removeAll();
-       jPanel1.add(con);
+        jPanel1.add(con);
         jPanel1.repaint();
         jPanel1.revalidate();
     }//GEN-LAST:event_btnContratacionesActionPerformed
@@ -131,7 +137,14 @@ public class Principal extends javax.swing.JFrame {
         jDialog1.setSize(385, 480);
         jDialog1.setLocationRelativeTo(null);
         jDialog1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
     }//GEN-LAST:event_btnSerEveLocActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
