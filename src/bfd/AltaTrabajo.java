@@ -23,9 +23,9 @@ import javax.swing.DefaultComboBoxModel;
 public class AltaTrabajo extends javax.swing.JPanel {
 
     Contratacion con;
-    GUIContratacionJF jf;
+    GUIContratacion jf;
     
-    public AltaTrabajo(Contratacion con, GUIContratacionJF jf) {
+    public AltaTrabajo(Contratacion con, GUIContratacion jf) {
         initComponents();
         this.con = con;
         this.jf = jf;

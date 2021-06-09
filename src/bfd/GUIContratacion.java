@@ -5,6 +5,15 @@
  */
 package bfd;
 
+import BD.Conexion;
+import Clases.Contratacion;
+import Clases.Pago;
+import Clases.Trabajo;
+import static bfd.GUIContratacionJF.con;
+import java.text.SimpleDateFormat;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nacho
@@ -14,8 +23,14 @@ public class GUIContratacion extends javax.swing.JPanel {
     /**
      * Creates new form GUIContratacion
      */
-    public GUIContratacion() {
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    static Contratacion con;
+    static Principal main;
+    public GUIContratacion(Principal main,Contratacion con) {
         initComponents();
+        this.main = main;
+        this.con = con;
+        load();
     }
 
     /**
@@ -27,19 +42,331 @@ public class GUIContratacion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        tfCliente = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        btnNuevoPago = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        dcFecha = new com.toedter.calendar.JDateChooser();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tPagos = new javax.swing.JTable();
+        btnEliminarPago = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnEliminarTrabajo = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tTrabajos = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        taDesc = new javax.swing.JTextArea();
+        sPresupuesto = new javax.swing.JSpinner();
+        jLabel5 = new javax.swing.JLabel();
+        btnGuardarPresupuesto = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        btnNuevoTrabajo = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        tfCliente.setText("TFCliente");
+
+        jLabel8.setText("Trabajos:");
+
+        btnNuevoPago.setText("Nuevo");
+        btnNuevoPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoPagoActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Cliente: ");
+
+        tPagos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Monto"
+            }
+        ));
+        jScrollPane5.setViewportView(tPagos);
+
+        btnEliminarPago.setText("Eliminar");
+        btnEliminarPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPagoActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Contratación");
+
+        jLabel2.setText("Fecha:");
+
+        jLabel3.setText("Descripción:");
+
+        jLabel7.setText("Presupuesto Total:");
+
+        btnEliminarTrabajo.setText("Eliminar");
+        btnEliminarTrabajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarTrabajoActionPerformed(evt);
+            }
+        });
+
+        tTrabajos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Localidad", "Drirección", "Horas", "Presupuesto"
+            }
+        ));
+        jScrollPane4.setViewportView(tTrabajos);
+
+        taDesc.setColumns(20);
+        taDesc.setRows(5);
+        jScrollPane2.setViewportView(taDesc);
+
+        jLabel5.setText("Pagos:");
+
+        btnGuardarPresupuesto.setText("Guardar");
+        btnGuardarPresupuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPresupuestoActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Información:");
+
+        btnNuevoTrabajo.setText("Nuevo");
+        btnNuevoTrabajo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoTrabajoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnNuevoTrabajo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnEliminarTrabajo))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane4)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jScrollPane2)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel6)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel7)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(sPresupuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(btnGuardarPresupuesto)))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(btnNuevoPago)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(btnEliminarPago))
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5))))
+                            .addComponent(jLabel8)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(248, 248, 248)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2))
+                            .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNuevoPago)
+                        .addComponent(btnEliminarPago))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(sPresupuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGuardarPresupuesto)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel8)
+                .addGap(3, 3, 3)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevoTrabajo)
+                    .addComponent(btnEliminarTrabajo)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnNuevoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPagoActionPerformed
+        // TODO add your handling code here:
+        //ABMPago pago = new ABMPago();
+        //Contratacion con = Conexion.getInstance().getContrataciones().get(0);
+        AltaPago pago = new AltaPago(con,this);
+        jDialog1.setContentPane(pago);
+        jDialog1.setSize(330, 230);
+        jDialog1.setLocationRelativeTo(null);
+        jDialog1.setVisible(true);
+    }//GEN-LAST:event_btnNuevoPagoActionPerformed
+
+    public void load(){
+        tfCliente.setText(con.getCliente().getApellido());
+        dcFecha.setDate(con.getFecha());
+        taDesc.setText(con.getDescripcion());
+        sPresupuesto.setValue(con.getPresupuesto());
+        cargarPagos();
+        cargarTrabajos();
+        
+    }
+    
+    public static void cargarTrabajos(){
+        Conexion.getInstance().refresh(con);
+        Iterator<Trabajo> it = con.getTrabajos().iterator();
+        DefaultTableModel mdl = (DefaultTableModel) tTrabajos.getModel();
+        mdl.setRowCount(0);
+        while (it.hasNext()) {
+            Trabajo c = it.next();
+            if (c.isVigente()) {
+                Object[] fila = new Object[5];
+                fila[0] = c;
+                fila[1] = c.getLocalidad().getNombre();
+                fila[2] = c.getDir();
+                fila[3] = c.getHoras();
+                fila[4] = c.getPresupuesto();
+                mdl.addRow(fila);
+            }
+        }
+    }
+    
+    public static void cargarPagos(){
+        Conexion.getInstance().refresh(con);
+        Iterator<Pago> it = con.getPagos().iterator();
+        DefaultTableModel mdl = (DefaultTableModel) tPagos.getModel();
+        mdl.setRowCount(0);
+        while (it.hasNext()) {
+            Pago c = it.next();
+            if (c.isVigente()) { 
+                Object[] fila = new Object[2];
+                fila[0] = sdf.format(c.getFecha());
+                fila[1] = c;
+                mdl.addRow(fila);
+            }
+        }
+    }
+    
+    private void btnEliminarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPagoActionPerformed
+        // TODO add your handling code here:
+        Pago p;
+        if(tPagos.getSelectedRow()==0){
+            p = (Pago) tPagos.getValueAt(tPagos.getSelectedRow(), 1);
+            p.setVigente(false);
+            Conexion.getInstance().merge(p);
+            cargarPagos();
+        }
+    }//GEN-LAST:event_btnEliminarPagoActionPerformed
+
+    private void btnEliminarTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTrabajoActionPerformed
+        // TODO add your handling code here:
+        Trabajo tr;
+        if(tTrabajos.getSelectedRow()==0){
+            tr = (Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0);
+            tr.setVigente(false);
+            Conexion.getInstance().merge(tr);
+            cargarTrabajos();
+        }
+
+    }//GEN-LAST:event_btnEliminarTrabajoActionPerformed
+
+    private void btnGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPresupuestoActionPerformed
+        // TODO add your handling code here:
+        con.setDescripcion(taDesc.getText());
+        con.setPresupuesto((int) sPresupuesto.getValue());
+        con.setFecha(dcFecha.getDate());
+        Conexion.getInstance().merge(con);
+    }//GEN-LAST:event_btnGuardarPresupuestoActionPerformed
+
+    private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
+        // TODO add your handling code here:
+        AltaTrabajo at = new AltaTrabajo(con,this);
+        jDialog1.setContentPane(at);
+        jDialog1.setSize(385, 480);
+        jDialog1.setLocationRelativeTo(null);
+        jDialog1.setVisible(true);
+    }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminarPago;
+    private javax.swing.JButton btnEliminarTrabajo;
+    private javax.swing.JButton btnGuardarPresupuesto;
+    private javax.swing.JButton btnNuevoPago;
+    private javax.swing.JButton btnNuevoTrabajo;
+    private com.toedter.calendar.JDateChooser dcFecha;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
+    private static javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSpinner sPresupuesto;
+    private static javax.swing.JTable tPagos;
+    private static javax.swing.JTable tTrabajos;
+    private javax.swing.JTextArea taDesc;
+    private javax.swing.JTextField tfCliente;
     // End of variables declaration//GEN-END:variables
 }

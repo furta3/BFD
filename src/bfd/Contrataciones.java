@@ -9,10 +9,11 @@ import java.text.SimpleDateFormat;
 
 public class Contrataciones extends javax.swing.JPanel {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    
-    public Contrataciones() {
+    static Principal main;
+    public Contrataciones(Principal main) {
         initComponents();
         CargarContrataciones();
+        this.main = main;
     }
     
     public void CargarContrataciones(){
@@ -51,6 +52,7 @@ public class Contrataciones extends javax.swing.JPanel {
                 "Fecha", "Cliente", "Personas", "Presupuesto", "Descripción"
             }
         ));
+        tContrataciones.setRowSelectionAllowed(true);
         tContrataciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tContratacionesMouseClicked(evt);
@@ -90,8 +92,12 @@ public class Contrataciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tContratacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tContratacionesMouseClicked
-
-        Contratacion con = new Contratacion();
+        
+        if(tContrataciones.getSelectedRow()==0){
+            GUIContratacion con = new GUIContratacion(main,(Contratacion) tContrataciones.getValueAt(tContrataciones.getSelectedRow(), 4));
+            main.AbrirContratacion(con);
+        }
+        
         
     }//GEN-LAST:event_tContratacionesMouseClicked
 

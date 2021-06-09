@@ -20,8 +20,8 @@ public class AltaPago extends javax.swing.JPanel {
      * Creates new form AltaPago
      */
     Contratacion con;
-    GUIContratacionJF FR;
-    public AltaPago(Contratacion cli, GUIContratacionJF fr) {
+    GUIContratacion FR;
+    public AltaPago(Contratacion cli, GUIContratacion fr) {
         initComponents();
         con = cli;
         FR = fr;

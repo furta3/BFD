@@ -11,19 +11,25 @@ package bfd;
  */
 
 import BD.Conexion;
+import Clases.Contratacion;
+import Clases.Trabajo;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.PopupMenu;
 public class Principal extends javax.swing.JFrame {
     
-    AltaContratacion altaCon;
-    Contrataciones con;
-    
+    static AltaContratacion altaCon;
+    static Contrataciones contrataciones;
+    static GUIContratacion con;
+    static Trabajos trabajo;
+    static Contratacion contra;
+    static Principal padre;
     
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
         Conexion.getInstance();
+        this.padre = this;
     }
 
     @SuppressWarnings("unchecked")
@@ -122,10 +128,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
-        con = new Contrataciones();
-        con.setVisible(true);
+        contrataciones = new Contrataciones(this);
+        contrataciones.setVisible(true);
         jPanel1.removeAll();
-        jPanel1.add(con);
+        jPanel1.add(contrataciones);
         jPanel1.repaint();
         jPanel1.revalidate();
     }//GEN-LAST:event_btnContratacionesActionPerformed
@@ -143,9 +149,29 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public static void AbrirTrabajo(Trabajo tra){
+        trabajo = new Trabajos();//tra
+        trabajo.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(trabajo);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    public static void AbrirContratacion(GUIContratacion contra){
+        con = contra;
+        con.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(con);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -184,6 +210,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnSerEveLoc;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JPanel jPanel1;
+    private static javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
