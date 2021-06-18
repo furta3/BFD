@@ -25,7 +25,7 @@ public class Persona implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private String nombre;
     private String apellido;
     private String telefono;
@@ -46,7 +46,7 @@ public class Persona implements Serializable {
     }
 
     public Persona() {}
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -71,7 +71,7 @@ public class Persona implements Serializable {
         this.telefono = telefono;
     }
 
-    
+
     public Long getId() {
         return id;
     }
@@ -104,5 +104,5 @@ public class Persona implements Serializable {
     public String toString() {
         return "Clases.Persona[ id=" + id + " ]";
     }
-    
+
 }

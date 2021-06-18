@@ -18,19 +18,19 @@ public class Contrataciones extends javax.swing.JPanel {
     
     public void CargarContrataciones(){
         Iterator<Contratacion> it = Conexion.getInstance().getContrataciones().iterator();
-                DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
-                while (it.hasNext()) {
-                    Contratacion c = it.next();
-                    //if (c.isActivo()) {  los booleanos van en la consulata de mwsql
-                        Object[] fila = new Object[5];
-                        fila[0] = sdf.format(c.getFecha());
-                        fila[1] = c.getCliente().getApellido();
-                        fila[2] = c.getCantPersonas();
-                        fila[3] = c.getPresupuesto();
-                        fila[4] = c;
-                        mdl.addRow(fila); 
-                    //}
-                }
+        DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
+        while (it.hasNext()) {
+            Contratacion c = it.next();
+            //if (c.isActivo()) {  
+                Object[] fila = new Object[5];
+                fila[0] = sdf.format(c.getFecha());
+                fila[1] = c.getCliente().getApellido();
+                fila[2] = c.getCantPersonas();
+                fila[3] = c.getPresupuesto();
+                fila[4] = c;
+                mdl.addRow(fila); 
+            //}
+        }
     }
     
     @SuppressWarnings("unchecked")
