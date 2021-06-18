@@ -6,9 +6,11 @@
 package BD;
 
 import Clases.Clientes;
+import Clases.Empleado;
 import Clases.Contratacion;
 import Clases.Evento;
 import Clases.Localidad;
+import Clases.Persona;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -99,6 +101,20 @@ public class Conexion {
         return lista;
     }
     
+       public List<Clientes> clienteDetallado() {
+        EntityManager em = getEntity();
+        List<Clientes> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("select p.nombre, p.apellido, p.telefono, c.dir, c.email from persona as p inner join clientes as c on p.id = c.id", Clientes.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
     public List<Contratacion> getContrataciones(){
         EntityManager em = getEntity();
         List<Contratacion> lista = null;
@@ -113,6 +129,7 @@ public class Conexion {
         return lista;
     }
     
+
     public List<Evento> getEventos(){
         EntityManager em = getEntity();
         List<Evento> lista = null;
@@ -140,6 +157,22 @@ public class Conexion {
         }
         return lista;
     }
+    
+
+    public List<Clientes> listaEmpleado() {
+        EntityManager em = getEntity();
+        List<Clientes> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT * FROM persona, empleado WHERE persona.Id = empleado.Id ORDER BY nombre ASC", Empleado.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
+    
     
     
     public Clientes getCliente(int id){
