@@ -9,6 +9,7 @@ import BD.Conexion;
 import Clases.Clientes;
 import Clases.Contratacion;
 import static java.lang.Integer.parseInt;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -18,9 +19,11 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class AltaContratacion extends javax.swing.JPanel {
 
-
-    public AltaContratacion() {
+    Principal main;
+    public AltaContratacion(Principal main) {
         initComponents();
+        this.main = main;
+        lError.setVisible(false);
         
         List<Clientes> cli;
         cli = Conexion.getInstance().listaEspecies();
@@ -31,6 +34,8 @@ public class AltaContratacion extends javax.swing.JPanel {
         }
         cbClientes.setModel(dcm);
         this.setVisible(true);
+        
+        dcFecha.setDate(new Date());
     }
 
     /**
@@ -55,6 +60,7 @@ public class AltaContratacion extends javax.swing.JPanel {
         btnNuevoCliente = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lError = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(600, 400));
 
@@ -86,36 +92,45 @@ public class AltaContratacion extends javax.swing.JPanel {
 
         btnCancelar.setText("Cancelar");
 
+        lError.setForeground(new java.awt.Color(255, 51, 51));
+        lError.setText("Llene todos los campos para continuar.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(158, 158, 158)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(33, 33, 33)
-                                .addComponent(cbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sPersonas)
-                                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNuevoCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnCancelar)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAceptar)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lError)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(33, 33, 33)
+                                    .addComponent(cbClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnNuevoCliente))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(btnCancelar)
+                            .addGap(41, 41, 41)
+                            .addComponent(btnAceptar))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(sPersonas, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))))))
                 .addContainerGap(176, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,12 +153,16 @@ public class AltaContratacion extends javax.swing.JPanel {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lError)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addGap(48, 48, 48))
         );
+
+        lError.getAccessibleContext().setAccessibleName("lError");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoClienteActionPerformed
@@ -154,14 +173,27 @@ public class AltaContratacion extends javax.swing.JPanel {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
-        Contratacion con = new Contratacion();
-        con.setFecha(dcFecha.getDate());
-        con.setCantPersonas(parseInt(sPersonas.getValue().toString()));
-        con.setCliente((Clientes) cbClientes.getSelectedItem());
-        con.setDescripcion(taDescripcion.getText());
-        con.setVigente(true);
+        if(dcFecha.getDate()!=null && sPersonas.getValue()!=null && taDescripcion!=null && cbClientes.getSelectedIndex()!=-1){
+            Contratacion con = new Contratacion();
+            con.setFecha(dcFecha.getDate());
+            con.setCantPersonas(parseInt(sPersonas.getValue().toString()));
+            con.setCliente((Clientes) cbClientes.getSelectedItem());
+            con.setDescripcion(taDescripcion.getText());
+            con.setVigente(true);
+
+            Conexion.getInstance().persist(con);
+
+            dcFecha.setCalendar(null);
+            sPersonas.setValue(0);
+            taDescripcion.setText("");
+            lError.setVisible(false);
+
+            GUIContratacion guicon = new GUIContratacion(main,con);
+            main.AbrirContratacion(guicon);
+        }
+        else
+            lError.setVisible(true);
         
-        Conexion.getInstance().persist(con);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
@@ -177,6 +209,7 @@ public class AltaContratacion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lError;
     private javax.swing.JSpinner sPersonas;
     private javax.swing.JTextArea taDescripcion;
     // End of variables declaration//GEN-END:variables

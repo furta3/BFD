@@ -93,7 +93,7 @@ public class Contrataciones extends javax.swing.JPanel {
 
     private void tContratacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tContratacionesMouseClicked
         
-        if(tContrataciones.getSelectedRow()==0){
+        if(tContrataciones.getSelectedRowCount()==1){
             GUIContratacion con = new GUIContratacion(main,(Contratacion) tContrataciones.getValueAt(tContrataciones.getSelectedRow(), 4));
             main.AbrirContratacion(con);
         }

@@ -9,9 +9,10 @@ import BD.Conexion;
 import Clases.Contratacion;
 import Clases.Pago;
 import Clases.Trabajo;
-import static bfd.GUIContratacionJF.con;
+
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -130,6 +131,11 @@ public class GUIContratacion extends javax.swing.JPanel {
                 "Fecha", "Localidad", "Drirección", "Horas", "Presupuesto"
             }
         ));
+        tTrabajos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tTrabajosMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tTrabajos);
 
         taDesc.setColumns(20);
@@ -336,12 +342,18 @@ public class GUIContratacion extends javax.swing.JPanel {
 
     private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
         // TODO add your handling code here:
-        AltaTrabajo at = new AltaTrabajo(con,this);
-        jDialog1.setContentPane(at);
-        jDialog1.setSize(385, 480);
-        jDialog1.setLocationRelativeTo(null);
-        jDialog1.setVisible(true);
+        AltaTrabajo at = new AltaTrabajo(main,con,this);
+        main.AbrirAltaTrabajo(at);
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
+
+    private void tTrabajosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tTrabajosMouseClicked
+        // TODO add your handling code here:
+        
+        if(tTrabajos.getSelectedRow()==0){
+            Trabajos tra = new Trabajos(main,(Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0));
+            main.AbrirTrabajo(tra);
+        }
+    }//GEN-LAST:event_tTrabajosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -24,6 +24,7 @@ public class Principal extends javax.swing.JFrame {
     static Trabajos trabajo;
     static Contratacion contra;
     static Principal padre;
+    static AltaTrabajo at;
     
     public Principal() {
         initComponents();
@@ -118,7 +119,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
-        altaCon = new AltaContratacion();
+        altaCon = new AltaContratacion(this);
         altaCon.setVisible(true);
         jPanel1.removeAll();
         jPanel1.add(altaCon);
@@ -139,10 +140,8 @@ public class Principal extends javax.swing.JFrame {
     private void btnSerEveLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSerEveLocActionPerformed
         // TODO add your handling code here:
         ABMDatos d = new ABMDatos();
-        jDialog1.setContentPane(d);
-        jDialog1.setSize(385, 480);
-        jDialog1.setLocationRelativeTo(null);
-        jDialog1.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(d);
         jPanel1.repaint();
         jPanel1.revalidate();
     }//GEN-LAST:event_btnSerEveLocActionPerformed
@@ -151,11 +150,20 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public static void AbrirTrabajo(Trabajo tra){
-        trabajo = new Trabajos();//tra
+    public static void AbrirTrabajo(Trabajos tra){
+        trabajo = tra;//tra
         trabajo.setVisible(true);
         jPanel1.removeAll();
         jPanel1.add(trabajo);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    public static void AbrirAltaTrabajo(AltaTrabajo altTra){
+        at =  altTra;
+        jPanel1.removeAll();
+        jPanel1.add(at);
         jPanel1.setVisible(true);
         jPanel1.repaint();
         jPanel1.revalidate();
