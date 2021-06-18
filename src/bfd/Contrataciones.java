@@ -9,27 +9,28 @@ import java.text.SimpleDateFormat;
 
 public class Contrataciones extends javax.swing.JPanel {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    
-    public Contrataciones() {
+    static Principal main;
+    public Contrataciones(Principal main) {
         initComponents();
         CargarContrataciones();
+        this.main = main;
     }
     
     public void CargarContrataciones(){
         Iterator<Contratacion> it = Conexion.getInstance().getContrataciones().iterator();
-                DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
-                while (it.hasNext()) {
-                    Contratacion c = it.next();
-                    //if (c.isActivo()) {  los booleanos van en la consulata de mwsql
-                        Object[] fila = new Object[5];
-                        fila[0] = sdf.format(c.getFecha());
-                        fila[1] = c.getCliente().getApellido();
-                        fila[2] = c.getCantPersonas();
-                        fila[3] = c.getPresupuesto();
-                        fila[4] = c;
-                        mdl.addRow(fila); 
-                    //}
-                }
+        DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
+        while (it.hasNext()) {
+            Contratacion c = it.next();
+            //if (c.isActivo()) {  
+                Object[] fila = new Object[5];
+                fila[0] = sdf.format(c.getFecha());
+                fila[1] = c.getCliente().getApellido();
+                fila[2] = c.getCantPersonas();
+                fila[3] = c.getPresupuesto();
+                fila[4] = c;
+                mdl.addRow(fila); 
+            //}
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -54,6 +55,7 @@ public class Contrataciones extends javax.swing.JPanel {
                 "Fecha", "Cliente", "Personas", "Presupuesto", "Descripción"
             }
         ));
+        tContrataciones.setRowSelectionAllowed(true);
         tContrataciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tContratacionesMouseClicked(evt);
@@ -115,8 +117,12 @@ public class Contrataciones extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tContratacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tContratacionesMouseClicked
-
-        Contratacion con = new Contratacion();
+        
+        if(tContrataciones.getSelectedRowCount()==1){
+            GUIContratacion con = new GUIContratacion(main,(Contratacion) tContrataciones.getValueAt(tContrataciones.getSelectedRow(), 4));
+            main.AbrirContratacion(con);
+        }
+        
         
     }//GEN-LAST:event_tContratacionesMouseClicked
 

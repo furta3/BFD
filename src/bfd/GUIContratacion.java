@@ -9,73 +9,31 @@ import BD.Conexion;
 import Clases.Contratacion;
 import Clases.Pago;
 import Clases.Trabajo;
+
 import java.text.SimpleDateFormat;
 import java.util.Iterator;
-import java.util.List;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author nacho
  */
-public class GUIContratacionJF extends javax.swing.JFrame {
+public class GUIContratacion extends javax.swing.JPanel {
 
     /**
-     * Creates new form GUIContratacionJF
+     * Creates new form GUIContratacion
      */
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    static Contratacion con = Conexion.getInstance().getContrataciones().get(0);
-    public GUIContratacionJF() {
+    static Contratacion con;
+    static Principal main;
+    public GUIContratacion(Principal main,Contratacion con) {
         initComponents();
-        setLocationRelativeTo(null);
+        this.main = main;
+        this.con = con;
         load();
-        cargarTrabajos();
-        cargarPagos();
     }
-    
-    public void load(){
-        tfCliente.setText(con.getCliente().getApellido());
-        dcFecha.setDate(con.getFecha());
-        taDesc.setText(con.getDescripcion());
-        sPresupuesto.setValue(con.getPresupuesto());
-        
-    }
-    
-    public static void cargarTrabajos(){
-        Conexion.getInstance().refresh(con);
-        Iterator<Trabajo> it = con.getTrabajos().iterator();
-        DefaultTableModel mdl = (DefaultTableModel) tTrabajos.getModel();
-        mdl.setRowCount(0);
-        while (it.hasNext()) {
-            Trabajo c = it.next();
-            if (c.isVigente()) {
-                Object[] fila = new Object[5];
-                fila[0] = c;
-                fila[1] = c.getLocalidad().getNombre();
-                fila[2] = c.getDir();
-                fila[3] = c.getHoras();
-                fila[4] = c.getPresupuesto();
-                mdl.addRow(fila);
-            }
-        }
-    }
-    
-    public static void cargarPagos(){
-        Conexion.getInstance().refresh(con);
-        Iterator<Pago> it = con.getPagos().iterator();
-        DefaultTableModel mdl = (DefaultTableModel) tPagos.getModel();
-        mdl.setRowCount(0);
-        while (it.hasNext()) {
-            Pago c = it.next();
-            if (c.isVigente()) { 
-                Object[] fila = new Object[2];
-                fila[0] = sdf.format(c.getFecha());
-                fila[1] = c;
-                mdl.addRow(fila);
-            }
-        }
-    }
-    public void asd(){}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,8 +79,6 @@ public class GUIContratacionJF extends javax.swing.JFrame {
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setBackground(new java.awt.Color(36, 36, 36));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lblDescripcion.png"))); // NOI18N
@@ -148,6 +104,11 @@ public class GUIContratacionJF extends javax.swing.JFrame {
                 "Fecha", "Localidad", "Drirección", "Horas", "Presupuesto"
             }
         ));
+        tTrabajos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tTrabajosMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tTrabajos);
 
         taDesc.setColumns(20);
@@ -263,16 +224,15 @@ public class GUIContratacionJF extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(tfCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dcFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
@@ -284,9 +244,9 @@ public class GUIContratacionJF extends javax.swing.JFrame {
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnNuevoPago)
-                        .addComponent(btnEliminarPago))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnEliminarPago, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnNuevoPago))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
                         .addComponent(sPresupuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,23 +259,19 @@ public class GUIContratacionJF extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevoTrabajo)
                     .addComponent(btnEliminarTrabajo))
-                .addContainerGap())
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 198, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPagoActionPerformed
@@ -329,27 +285,51 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         jDialog1.setVisible(true);
     }//GEN-LAST:event_btnNuevoPagoActionPerformed
 
-    private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
-        // TODO add your handling code here:
-        AltaTrabajo at = new AltaTrabajo(con,this);
-        jDialog1.setContentPane(at);
-        jDialog1.setSize(385, 480);
-        jDialog1.setLocationRelativeTo(null);
-        jDialog1.setVisible(true);
-    }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
-
-    private void btnEliminarTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTrabajoActionPerformed
-        // TODO add your handling code here:
-        Trabajo tr;
-        if(tTrabajos.getSelectedRow()==0){
-            tr = (Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0);
-            tr.setVigente(false);
-            Conexion.getInstance().merge(tr);
-            cargarTrabajos();
+    public void load(){
+        tfCliente.setText(con.getCliente().getApellido());
+        dcFecha.setDate(con.getFecha());
+        taDesc.setText(con.getDescripcion());
+        sPresupuesto.setValue(con.getPresupuesto());
+        cargarPagos();
+        cargarTrabajos();
+        
+    }
+    
+    public static void cargarTrabajos(){
+        Conexion.getInstance().refresh(con);
+        Iterator<Trabajo> it = con.getTrabajos().iterator();
+        DefaultTableModel mdl = (DefaultTableModel) tTrabajos.getModel();
+        mdl.setRowCount(0);
+        while (it.hasNext()) {
+            Trabajo c = it.next();
+            if (c.isVigente()) {
+                Object[] fila = new Object[5];
+                fila[0] = c;
+                fila[1] = c.getLocalidad().getNombre();
+                fila[2] = c.getDir();
+                fila[3] = c.getHoras();
+                fila[4] = c.getPresupuesto();
+                mdl.addRow(fila);
+            }
         }
-            
-    }//GEN-LAST:event_btnEliminarTrabajoActionPerformed
-
+    }
+    
+    public static void cargarPagos(){
+        Conexion.getInstance().refresh(con);
+        Iterator<Pago> it = con.getPagos().iterator();
+        DefaultTableModel mdl = (DefaultTableModel) tPagos.getModel();
+        mdl.setRowCount(0);
+        while (it.hasNext()) {
+            Pago c = it.next();
+            if (c.isVigente()) { 
+                Object[] fila = new Object[2];
+                fila[0] = sdf.format(c.getFecha());
+                fila[1] = c;
+                mdl.addRow(fila);
+            }
+        }
+    }
+    
     private void btnEliminarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPagoActionPerformed
         // TODO add your handling code here:
         Pago p;
@@ -361,6 +341,18 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarPagoActionPerformed
 
+    private void btnEliminarTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTrabajoActionPerformed
+        // TODO add your handling code here:
+        Trabajo tr;
+        if(tTrabajos.getSelectedRow()==0){
+            tr = (Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0);
+            tr.setVigente(false);
+            Conexion.getInstance().merge(tr);
+            cargarTrabajos();
+        }
+
+    }//GEN-LAST:event_btnEliminarTrabajoActionPerformed
+
     private void btnGuardarPresupuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPresupuestoActionPerformed
         // TODO add your handling code here:
         con.setDescripcion(taDesc.getText());
@@ -369,40 +361,21 @@ public class GUIContratacionJF extends javax.swing.JFrame {
         Conexion.getInstance().merge(con);
     }//GEN-LAST:event_btnGuardarPresupuestoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIContratacionJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIContratacionJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIContratacionJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIContratacionJF.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
+        // TODO add your handling code here:
+        AltaTrabajo at = new AltaTrabajo(main,con,this);
+        main.AbrirAltaTrabajo(at);
+    }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIContratacionJF().setVisible(true);
-            }
-        });
-    }
+    private void tTrabajosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tTrabajosMouseClicked
+        // TODO add your handling code here:
+        
+        if(tTrabajos.getSelectedRowCount()==1){
+            Trabajos tra = new Trabajos(main,con,(Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0));
+            main.AbrirTrabajo(tra);
+        }
+    }//GEN-LAST:event_tTrabajosMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminarPago;
@@ -414,7 +387,7 @@ public class GUIContratacionJF extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private static javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

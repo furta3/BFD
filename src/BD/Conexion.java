@@ -114,6 +114,20 @@ public class Conexion {
         }
         return lista;
     }
+       
+    public List<Empleado> getEmpleados(){
+        EntityManager em = getEntity();
+        List<Empleado> lista = null;
+        em.getTransaction().begin();
+        try {
+            lista = em.createNativeQuery("SELECT persona.* FROM persona, empleado WHERE persona.Id = empleado.Id ORDER BY nombre ASC", Empleado.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        return lista;
+    }
     
     public List<Contratacion> getContrataciones(){
         EntityManager em = getEntity();

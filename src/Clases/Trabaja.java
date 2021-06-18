@@ -33,6 +33,14 @@ public class Trabaja implements Serializable {
     private boolean pago;
     private boolean vigente;
 
+    public Trabaja(Empleado empleado, Trabajo trabajo, int sueldo, boolean pago, boolean vigente) {
+        this.empleado = empleado;
+        this.trabajo = trabajo;
+        this.sueldo = sueldo;
+        this.pago = pago;
+        this.vigente = vigente;
+    }
+    public Trabaja(){}
     public boolean isVigente() {
         return vigente;
     }
@@ -103,7 +111,7 @@ public class Trabaja implements Serializable {
 
     @Override
     public String toString() {
-        return "Clases.Trabaja[ id=" + id + " ]";
+        return ""+sueldo;
     }
     
 }

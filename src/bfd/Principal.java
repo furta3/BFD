@@ -11,18 +11,32 @@ package bfd;
  */
 
 import BD.Conexion;
+import Clases.Contratacion;
+import Clases.Trabajo;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.PopupMenu;
 public class Principal extends javax.swing.JFrame {
+
+    
+    static AltaContratacion altaCon;
+    static Contrataciones contrataciones;
+    static GUIContratacion con;
+    static Trabajos trabajo;
+    static Contratacion contra;
+    static Principal padre;
+    static AltaTrabajo at;
+
     ClientesEmpleados clientEmp;
-    AltaContratacion altaCon;
-    Contrataciones con;
+    //AltaContratacion altaCon;
+    //Contrataciones con;
+
     
     public Principal() {
         initComponents();
         setLocationRelativeTo(null);
         Conexion.getInstance();
+        this.padre = this;
     }
 
     @SuppressWarnings("unchecked")
@@ -145,7 +159,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoTrabajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoTrabajoActionPerformed
-        altaCon = new AltaContratacion();
+        altaCon = new AltaContratacion(this);
         altaCon.setVisible(true);
         jPanel1.removeAll();
         jPanel1.add(altaCon);
@@ -155,10 +169,10 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
-        con = new Contrataciones();
-        con.setVisible(true);
+        contrataciones = new Contrataciones(this);
+        contrataciones.setVisible(true);
         jPanel1.removeAll();
-        jPanel1.add(con);
+        jPanel1.add(contrataciones);
         jPanel1.repaint();
         jPanel1.revalidate();
     }//GEN-LAST:event_btnContratacionesActionPerformed
@@ -166,24 +180,54 @@ public class Principal extends javax.swing.JFrame {
     private void btnSerEveLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSerEveLocActionPerformed
         // TODO add your handling code here:
         ABMDatos d = new ABMDatos();
-        jDialog1.setContentPane(d);
-        jDialog1.setSize(385, 480);
-        jDialog1.setLocationRelativeTo(null);
-        jDialog1.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(d);
         jPanel1.repaint();
         jPanel1.revalidate();
     }//GEN-LAST:event_btnSerEveLocActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+
         clientEmp = new ClientesEmpleados();
         clientEmp.setVisible(true);
         jPanel1.removeAll();
         jPanel1.add(clientEmp);
         jPanel1.repaint();
         jPanel1.revalidate();
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public static void AbrirTrabajo(Trabajos tra){
+        trabajo = tra;//tra
+        trabajo.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(trabajo);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    public static void AbrirAltaTrabajo(AltaTrabajo altTra){
+        at =  altTra;
+        jPanel1.removeAll();
+        jPanel1.add(at);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    public static void AbrirContratacion(GUIContratacion contra){
+        con = contra;
+        con.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(con);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -223,7 +267,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel iconoBFD;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
-    private javax.swing.JPanel jPanel1;
+
+    private static javax.swing.JPanel jPanel1;
+
     private javax.swing.JPanel jPanel2;
+
     // End of variables declaration//GEN-END:variables
 }

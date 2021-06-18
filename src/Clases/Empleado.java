@@ -28,5 +28,9 @@ public class Empleado extends Persona implements Serializable {
     public void setTrabajos(List<Trabaja> trabajos) {
         this.trabajos = trabajos;
     }
+    @Override
+    public String toString() {
+        return super.getNombre() + " " +super.getApellido();
+    }
 
 }
