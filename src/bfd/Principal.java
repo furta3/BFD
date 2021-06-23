@@ -189,7 +189,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
-        clientEmp = new ClientesEmpleados();
+        clientEmp = new ClientesEmpleados(this);
         clientEmp.setVisible(true);
         jPanel1.removeAll();
         jPanel1.add(clientEmp);
