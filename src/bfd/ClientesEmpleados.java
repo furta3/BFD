@@ -20,13 +20,13 @@ import java.sql.Statement;
  * @author Buri
  */
 public class ClientesEmpleados extends javax.swing.JPanel {
-
+    Principal main;
     /**
      * Creates new form ClientesEmpleados
      */
-    public ClientesEmpleados() {
+    public ClientesEmpleados(Principal main) {
         initComponents();
-        
+        this.main = main;
     }
     
         public void cargarClientes(){
@@ -38,18 +38,14 @@ public class ClientesEmpleados extends javax.swing.JPanel {
            //Iterator<Clientes> it = Conexion.getInstance().clienteDetallado().iterator();
            //modelo.setColumnIdentifiers(new Object[]{"Nombres", "Apellidos", "Telefono","Email","Direccion"});
            
-           modelo.setColumnIdentifiers(new Object[]{"Nombres", "Apellidos", "Telefono"});
+           modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
            try{
                while(it.hasNext()){
                    Persona p = it.next();
-                   //Clientes c = it.next();
                    
                    Object[] fila = new Object[3];
-                   fila[0] = p.getNombre();
-                   fila[1] = p.getApellido();
-                   fila[2] = p.getTelefono();
-                   //fila[3] = c.getEmail();
-                   //fila[4] = c.getDir();
+                   fila[0] = p;
+                   fila[1] = p.getTelefono();        
                    modelo.addRow(fila);
                }
            }
@@ -62,15 +58,14 @@ public class ClientesEmpleados extends javax.swing.JPanel {
            DefaultTableModel modelo = new DefaultTableModel();
            tClientesEmpleados.setModel(modelo);
            Iterator<Clientes> it = Conexion.getInstance().listaEmpleado().iterator();
-           modelo.setColumnIdentifiers(new Object[]{"Nombres", "Apellidos", "Telefono"});
+           modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
            try{
                while(it.hasNext()){
                    Persona p = it.next();
                    
                    Object[] fila = new Object[3];
-                   fila[0] = p.getNombre();
-                   fila[1] = p.getApellido();
-                   fila[2] = p.getTelefono();
+                   fila[0] = p;
+                   fila[1] = p.getTelefono();   
                    modelo.addRow(fila);
                }
            }
