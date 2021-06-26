@@ -42,11 +42,12 @@ public class ClientesEmpleados extends javax.swing.JPanel {
            try{
                while(it.hasNext()){
                    Persona p = it.next();
-                   
-                   Object[] fila = new Object[3];
-                   fila[0] = p;
-                   fila[1] = p.getTelefono();        
-                   modelo.addRow(fila);
+                   if(p.isVigente()){
+                        Object[] fila = new Object[3];
+                        fila[0] = p;
+                        fila[1] = p.getTelefono();        
+                        modelo.addRow(fila);   
+                   }
                }
            }
            catch(Exception e){
@@ -62,11 +63,13 @@ public class ClientesEmpleados extends javax.swing.JPanel {
            try{
                while(it.hasNext()){
                    Persona p = it.next();
+                   if(p.isVigente()){
+                        Object[] fila = new Object[3];
+                        fila[0] = p;
+                        fila[1] = p.getTelefono();   
+                        modelo.addRow(fila);
+                   }
                    
-                   Object[] fila = new Object[3];
-                   fila[0] = p;
-                   fila[1] = p.getTelefono();   
-                   modelo.addRow(fila);
                }
            }
            catch(Exception e){
@@ -104,6 +107,11 @@ public class ClientesEmpleados extends javax.swing.JPanel {
 
             }
         ));
+        tClientesEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tClientesEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tClientesEmpleados);
 
         btnBuscar.setText("Buscar");
@@ -205,6 +213,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         // TODO add your handling code here:
    
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tClientesEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tClientesEmpleadosMouseClicked
+        // TODO add your handling code here:
+        if(tClientesEmpleados.getSelectedRowCount()==1){
+            if(botonClientes.isSelected()){
+                DetallesCliente dtCli = new DetallesCliente(main,(Clientes) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesCliente(dtCli);
+            }
+            else{
+                DetallesEmpleado dtEmp = new DetallesEmpleado(main,(Empleado) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesEmpleado(dtEmp);
+            }
+            
+        }
+    }//GEN-LAST:event_tClientesEmpleadosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

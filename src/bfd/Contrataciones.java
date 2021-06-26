@@ -54,8 +54,15 @@ public class Contrataciones extends javax.swing.JPanel {
             new String [] {
                 "Fecha", "Cliente", "Personas", "Presupuesto", "Descripción"
             }
-        ));
-        tContrataciones.setRowSelectionAllowed(true);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tContrataciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tContratacionesMouseClicked(evt);

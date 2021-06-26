@@ -27,13 +27,13 @@ public class Trabajos extends javax.swing.JPanel {
     Principal main;
     Trabajo tra;
     Contratacion con;
-    
-    public Trabajos(Principal main,Contratacion con, Trabajo tra) {
+    Empleado emp;
+    public Trabajos(Principal main,Contratacion con, Empleado emp, Trabajo tra) {
         initComponents();
         this.main = main;
         this.tra = tra;
         this.con = con;
-        
+        this.emp = emp;
         tfDireccion.setText(tra.getDir());
         tfCliente.setText(tra.getContratacion().getCliente().toString());
         
@@ -233,7 +233,10 @@ public class Trabajos extends javax.swing.JPanel {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        main.AbrirContratacion(new GUIContratacion(main,con));
+        if(emp == null)
+            main.AbrirContratacion(new GUIContratacion(main,con));
+        else
+            main.AbrirDetallesEmpleado(new DetallesEmpleado(main,emp));
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
