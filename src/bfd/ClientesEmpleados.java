@@ -54,11 +54,12 @@ public class ClientesEmpleados extends javax.swing.JPanel {
            try{
                while(it.hasNext()){
                    Persona p = it.next();
-                   
-                   Object[] fila = new Object[3];
-                   fila[0] = p;
-                   fila[1] = p.getTelefono();        
-                   modelo.addRow(fila);
+                   if(p.isVigente()){
+                        Object[] fila = new Object[3];
+                        fila[0] = p;
+                        fila[1] = p.getTelefono();        
+                        modelo.addRow(fila);   
+                   }
                }
            }
            catch(Exception e){
@@ -74,11 +75,13 @@ public class ClientesEmpleados extends javax.swing.JPanel {
            try{
                while(it.hasNext()){
                    Persona p = it.next();
+                   if(p.isVigente()){
+                        Object[] fila = new Object[3];
+                        fila[0] = p;
+                        fila[1] = p.getTelefono();   
+                        modelo.addRow(fila);
+                   }
                    
-                   Object[] fila = new Object[3];
-                   fila[0] = p;
-                   fila[1] = p.getTelefono();   
-                   modelo.addRow(fila);
                }
            }
            catch(Exception e){
@@ -196,6 +199,11 @@ public class ClientesEmpleados extends javax.swing.JPanel {
 
             }
         ));
+        tClientesEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tClientesEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tClientesEmpleados);
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/botonAceptar-2.png"))); // NOI18N
@@ -491,6 +499,7 @@ public class ClientesEmpleados extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
              if(btnAgregarClientes.isSelected()){
@@ -578,6 +587,23 @@ public class ClientesEmpleados extends javax.swing.JPanel {
             txtNombre.setText("Nombre");
         }
     }//GEN-LAST:event_txtNombreFocusLost
+
+    private void tClientesEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tClientesEmpleadosMouseClicked
+        // TODO add your handling code here:
+        if(tClientesEmpleados.getSelectedRowCount()==1){
+            if(botonClientes.isSelected()){
+                DetallesCliente dtCli = new DetallesCliente(main,(Clientes) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesCliente(dtCli);
+            }
+            else{
+                DetallesEmpleado dtEmp = new DetallesEmpleado(main,(Empleado) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesEmpleado(dtEmp);
+            }
+            
+        }
+    }//GEN-LAST:event_tClientesEmpleadosMouseClicked
+
+
 
     private void txtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusGained
         if(txtDireccion.getText().trim().equals("Direccion")){

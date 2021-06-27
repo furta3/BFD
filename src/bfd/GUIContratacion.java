@@ -371,7 +371,7 @@ public class GUIContratacion extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         if(tTrabajos.getSelectedRowCount()==1){
-            Trabajos tra = new Trabajos(main,con,(Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0));
+            Trabajos tra = new Trabajos(main,con,null,(Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0));
             main.AbrirTrabajo(tra);
         }
     }//GEN-LAST:event_tTrabajosMouseClicked

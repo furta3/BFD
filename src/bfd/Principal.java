@@ -26,8 +26,10 @@ public class Principal extends javax.swing.JFrame {
     static Contratacion contra;
     static Principal padre;
     static AltaTrabajo at;
+    static DetallesCliente dtCli;
+    static DetallesEmpleado dtEmp;
 
-    ClientesEmpleados clientEmp;
+    static ClientesEmpleados clientEmp;
     //AltaContratacion altaCon;
     //Contrataciones con;
 
@@ -64,6 +66,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
@@ -147,7 +150,7 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,6 +201,14 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public static void AbrirClientesEmpleados(ClientesEmpleados ce){
+        clientEmp = ce;
+        clientEmp.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(clientEmp);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
     public static void AbrirTrabajo(Trabajos tra){
         trabajo = tra;//tra
         trabajo.setVisible(true);
@@ -208,6 +219,24 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.revalidate();
     }
     
+    public static void AbrirDetallesCliente(DetallesCliente dtCl){
+        dtCli = dtCl;
+        dtCli.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(dtCli);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    public static void AbrirDetallesEmpleado(DetallesEmpleado dtEm){
+        dtEmp = dtEm;
+        jPanel1.removeAll();
+        jPanel1.add(dtEmp);
+        jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
     public static void AbrirAltaTrabajo(AltaTrabajo altTra){
         at =  altTra;
         jPanel1.removeAll();
@@ -267,10 +296,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel iconoBFD;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
-
     private static javax.swing.JPanel jPanel1;
-
     private javax.swing.JPanel jPanel2;
-
     // End of variables declaration//GEN-END:variables
 }
