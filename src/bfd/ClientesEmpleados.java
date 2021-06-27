@@ -203,6 +203,9 @@ public class ClientesEmpleados extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tClientesEmpleadosMouseClicked(evt);
             }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tClientesEmpleadosMousePressed(evt);
+            }
         });
         jScrollPane1.setViewportView(tClientesEmpleados);
 
@@ -418,8 +421,7 @@ public class ClientesEmpleados extends javax.swing.JPanel {
                             .addComponent(botonClientes)
                             .addComponent(botonEmpleados)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addComponent(jLabel5)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -448,7 +450,8 @@ public class ClientesEmpleados extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAgregarEmpleados)
                                     .addComponent(jLabel2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
+                        .addGap(0, 15, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar)
                     .addComponent(btnDetalles))
@@ -464,8 +467,7 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -659,6 +661,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
             txtEmail.setText("Email");
         }
     }//GEN-LAST:event_txtEmailFocusLost
+
+    private void tClientesEmpleadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tClientesEmpleadosMousePressed
+        // TODO add your handling code here:
+        if(tClientesEmpleados.getSelectedRowCount()==1){
+            if(botonClientes.isSelected()){
+                DetallesCliente dtCli = new DetallesCliente(main,(Clientes) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesCliente(dtCli);
+            }
+            else{
+                DetallesEmpleado dtEmp = new DetallesEmpleado(main,(Empleado) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesEmpleado(dtEmp);
+            }
+            
+        }
+    }//GEN-LAST:event_tClientesEmpleadosMousePressed
 
 
     
