@@ -604,7 +604,6 @@ public class ClientesEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_tClientesEmpleadosMouseClicked
 
 
-
     private void txtDireccionFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtDireccionFocusGained
         if(txtDireccion.getText().trim().equals("Direccion")){
             txtDireccion.setText("");
