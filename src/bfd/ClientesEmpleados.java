@@ -38,24 +38,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         txtDireccion.setText("Direccion");
         txtEmail.setText("Email");
         
-
+        cargarClientes();
     }
     
         public void cargarClientes(){
            DefaultTableModel modelo = new DefaultTableModel();
            tClientesEmpleados.setModel(modelo);
            
-           Iterator<Clientes> it = Conexion.getInstance().listaEspecies().iterator();
-           
-           //Iterator<Clientes> it = Conexion.getInstance().clienteDetallado().iterator();
-           //modelo.setColumnIdentifiers(new Object[]{"Nombres", "Apellidos", "Telefono","Email","Direccion"});
+           Iterator<Clientes> it = Conexion.getInstance().getClientes().iterator();
            
            modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
            try{
                while(it.hasNext()){
                    Persona p = it.next();
                    if(p.isVigente()){
-                        Object[] fila = new Object[3];
+                        Object[] fila = new Object[2];
                         fila[0] = p;
                         fila[1] = p.getTelefono();        
                         modelo.addRow(fila);   
@@ -70,23 +67,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
     public void cargarEmpleados(){
            DefaultTableModel modelo = new DefaultTableModel();
            tClientesEmpleados.setModel(modelo);
-           Iterator<Empleado> it = Conexion.getInstance().getEmpleados().iterator();
+           Iterator<Empleado> it = Conexion.getInstance().listaEmpleado().iterator();
            modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
-           try{
+           
                while(it.hasNext()){
+                   System.out.println("en el while");
                    Persona p = it.next();
                    if(p.isVigente()){
-                        Object[] fila = new Object[3];
+                        Object[] fila = new Object[2];
                         fila[0] = p;
                         fila[1] = p.getTelefono();   
                         modelo.addRow(fila);
                    }
                    
                }
-           }
-           catch(Exception e){
-               System.out.println(e);
-           }
+
     }  
     
     public void cargarClientesDetallado(){
@@ -94,9 +89,9 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         String textoBuscar = textbBuscar.getText().toString();
         
         DefaultTableModel modelo = new DefaultTableModel();
-         tClientesEmpleados.setModel(modelo);
+        tClientesEmpleados.setModel(modelo);
         Clientes cli2 = new Clientes();
-        Iterator<Clientes> it = Conexion.getInstance().listaEspecies().iterator();
+        Iterator<Clientes> it = Conexion.getInstance().getClientes().iterator();
         modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
 
            try{
@@ -504,38 +499,43 @@ public class ClientesEmpleados extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-             if(btnAgregarClientes.isSelected()){
-        Clientes cli = new Clientes();
+        if(btnAgregarClientes.isSelected()){
+            Clientes cli = new Clientes();
         
-        cli.setNombre(txtNombre.getText());
-        cli.setApellido(txtApellido.getText());
-        cli.setTelefono(txtTelefono.getText());
-        cli.setDir(txtDireccion.getText());
-        cli.setEmail(txtEmail.getText());
-        
-        Conexion.getInstance().persist(cli);
-        
-        txtNombre.setText("Nombre");
-        txtApellido.setText("Apellido");
-        txtTelefono.setText("Telefono");
-        txtDireccion.setText("Direccion");
-        txtEmail.setText("Email");
-        
+            cli.setNombre(txtNombre.getText());
+            cli.setApellido(txtApellido.getText());
+            cli.setTelefono(txtTelefono.getText());
+            cli.setDir(txtDireccion.getText());
+            cli.setEmail(txtEmail.getText());
+            cli.setVigente(true);
+            Conexion.getInstance().persist(cli);
+
+            txtNombre.setText("Nombre");
+            txtApellido.setText("Apellido");
+            txtTelefono.setText("Telefono");
+            txtDireccion.setText("Direccion");
+            txtEmail.setText("Email");
+            cargarClientes();
+            btnAgregarClientes.setSelected(true);
+            btnAgregarEmpleados.setSelected(false);
         }
         else if(btnAgregarEmpleados.isSelected()){
-        Empleado emp = new Empleado();
+            Empleado emp = new Empleado();  
 
-        emp.setNombre(txtNombre.getText());
-        emp.setApellido(txtApellido.getText());
-        emp.setTelefono(txtTelefono.getText());
+            emp.setNombre(txtNombre.getText());
+            emp.setApellido(txtApellido.getText());
+            emp.setTelefono(txtTelefono.getText());
+            emp.setVigente(true);
+            Conexion.getInstance().persist(emp);
 
-        Conexion.getInstance().persist(emp);
-        
-        txtNombre.setText("Nombre");
-        txtApellido.setText("Apellido");
-        txtTelefono.setText("Telefono");
-        txtDireccion.setText("Direccion");
-        txtEmail.setText("Email");
+            txtNombre.setText("Nombre");
+            txtApellido.setText("Apellido");
+            txtTelefono.setText("Telefono");
+            txtDireccion.setText("Direccion");
+            txtEmail.setText("Email");
+            cargarEmpleados();
+            btnAgregarClientes.setSelected(false);
+            btnAgregarEmpleados.setSelected(true);
         }
         
         

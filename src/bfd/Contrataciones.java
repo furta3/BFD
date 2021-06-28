@@ -21,7 +21,7 @@ public class Contrataciones extends javax.swing.JPanel {
         DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
         while (it.hasNext()) {
             Contratacion c = it.next();
-            //if (c.isActivo()) {  
+            if (c.isVigente()) {  
                 Object[] fila = new Object[5];
                 fila[0] = sdf.format(c.getFecha());
                 fila[1] = c.getCliente().getApellido();
@@ -29,8 +29,9 @@ public class Contrataciones extends javax.swing.JPanel {
                 fila[3] = c.getPresupuesto();
                 fila[4] = c;
                 mdl.addRow(fila); 
-            //}
+            }
         }
+        
     }
     
     @SuppressWarnings("unchecked")
