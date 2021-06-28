@@ -38,24 +38,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         txtDireccion.setText("Direccion");
         txtEmail.setText("Email");
         
-
+        cargarClientes();
     }
     
         public void cargarClientes(){
            DefaultTableModel modelo = new DefaultTableModel();
            tClientesEmpleados.setModel(modelo);
            
-           Iterator<Clientes> it = Conexion.getInstance().listaEspecies().iterator();
-           
-           //Iterator<Clientes> it = Conexion.getInstance().clienteDetallado().iterator();
-           //modelo.setColumnIdentifiers(new Object[]{"Nombres", "Apellidos", "Telefono","Email","Direccion"});
+           Iterator<Clientes> it = Conexion.getInstance().getClientes().iterator();
            
            modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
            try{
                while(it.hasNext()){
                    Persona p = it.next();
                    if(p.isVigente()){
-                        Object[] fila = new Object[3];
+                        Object[] fila = new Object[2];
                         fila[0] = p;
                         fila[1] = p.getTelefono();        
                         modelo.addRow(fila);   
@@ -70,23 +67,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
     public void cargarEmpleados(){
            DefaultTableModel modelo = new DefaultTableModel();
            tClientesEmpleados.setModel(modelo);
-           Iterator<Empleado> it = Conexion.getInstance().getEmpleados().iterator();
+           Iterator<Empleado> it = Conexion.getInstance().listaEmpleado().iterator();
            modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
-           try{
+           
                while(it.hasNext()){
+                   System.out.println("en el while");
                    Persona p = it.next();
                    if(p.isVigente()){
-                        Object[] fila = new Object[3];
+                        Object[] fila = new Object[2];
                         fila[0] = p;
                         fila[1] = p.getTelefono();   
                         modelo.addRow(fila);
                    }
                    
                }
-           }
-           catch(Exception e){
-               System.out.println(e);
-           }
+
     }  
     
     public void cargarClientesDetallado(){
@@ -94,9 +89,9 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         String textoBuscar = textbBuscar.getText().toString();
         
         DefaultTableModel modelo = new DefaultTableModel();
-         tClientesEmpleados.setModel(modelo);
+        tClientesEmpleados.setModel(modelo);
         Clientes cli2 = new Clientes();
-        Iterator<Clientes> it = Conexion.getInstance().listaEspecies().iterator();
+        Iterator<Clientes> it = Conexion.getInstance().getClientes().iterator();
         modelo.setColumnIdentifiers(new Object[]{"Nombre y Apellido", "Telefono"});
 
            try{
@@ -202,6 +197,9 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         tClientesEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tClientesEmpleadosMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tClientesEmpleadosMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tClientesEmpleados);
@@ -418,8 +416,7 @@ public class ClientesEmpleados extends javax.swing.JPanel {
                             .addComponent(botonClientes)
                             .addComponent(botonEmpleados)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addComponent(jLabel5)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -448,7 +445,8 @@ public class ClientesEmpleados extends javax.swing.JPanel {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAgregarEmpleados)
                                     .addComponent(jLabel2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)))
+                        .addGap(0, 15, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar)
                     .addComponent(btnDetalles))
@@ -464,8 +462,7 @@ public class ClientesEmpleados extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -502,38 +499,43 @@ public class ClientesEmpleados extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-             if(btnAgregarClientes.isSelected()){
-        Clientes cli = new Clientes();
+        if(btnAgregarClientes.isSelected()){
+            Clientes cli = new Clientes();
         
-        cli.setNombre(txtNombre.getText());
-        cli.setApellido(txtApellido.getText());
-        cli.setTelefono(txtTelefono.getText());
-        cli.setDir(txtDireccion.getText());
-        cli.setEmail(txtEmail.getText());
-        
-        Conexion.getInstance().persist(cli);
-        
-        txtNombre.setText("Nombre");
-        txtApellido.setText("Apellido");
-        txtTelefono.setText("Telefono");
-        txtDireccion.setText("Direccion");
-        txtEmail.setText("Email");
-        
+            cli.setNombre(txtNombre.getText());
+            cli.setApellido(txtApellido.getText());
+            cli.setTelefono(txtTelefono.getText());
+            cli.setDir(txtDireccion.getText());
+            cli.setEmail(txtEmail.getText());
+            cli.setVigente(true);
+            Conexion.getInstance().persist(cli);
+
+            txtNombre.setText("Nombre");
+            txtApellido.setText("Apellido");
+            txtTelefono.setText("Telefono");
+            txtDireccion.setText("Direccion");
+            txtEmail.setText("Email");
+            cargarClientes();
+            btnAgregarClientes.setSelected(true);
+            btnAgregarEmpleados.setSelected(false);
         }
         else if(btnAgregarEmpleados.isSelected()){
-        Empleado emp = new Empleado();
+            Empleado emp = new Empleado();  
 
-        emp.setNombre(txtNombre.getText());
-        emp.setApellido(txtApellido.getText());
-        emp.setTelefono(txtTelefono.getText());
+            emp.setNombre(txtNombre.getText());
+            emp.setApellido(txtApellido.getText());
+            emp.setTelefono(txtTelefono.getText());
+            emp.setVigente(true);
+            Conexion.getInstance().persist(emp);
 
-        Conexion.getInstance().persist(emp);
-        
-        txtNombre.setText("Nombre");
-        txtApellido.setText("Apellido");
-        txtTelefono.setText("Telefono");
-        txtDireccion.setText("Direccion");
-        txtEmail.setText("Email");
+            txtNombre.setText("Nombre");
+            txtApellido.setText("Apellido");
+            txtTelefono.setText("Telefono");
+            txtDireccion.setText("Direccion");
+            txtEmail.setText("Email");
+            cargarEmpleados();
+            btnAgregarClientes.setSelected(false);
+            btnAgregarEmpleados.setSelected(true);
         }
         
         
@@ -659,6 +661,21 @@ public class ClientesEmpleados extends javax.swing.JPanel {
             txtEmail.setText("Email");
         }
     }//GEN-LAST:event_txtEmailFocusLost
+
+    private void tClientesEmpleadosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tClientesEmpleadosMousePressed
+        // TODO add your handling code here:
+        if(tClientesEmpleados.getSelectedRowCount()==1){
+            if(botonClientes.isSelected()){
+                DetallesCliente dtCli = new DetallesCliente(main,(Clientes) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesCliente(dtCli);
+            }
+            else{
+                DetallesEmpleado dtEmp = new DetallesEmpleado(main,(Empleado) tClientesEmpleados.getValueAt(tClientesEmpleados.getSelectedRow(), 0));
+                main.AbrirDetallesEmpleado(dtEmp);
+            }
+            
+        }
+    }//GEN-LAST:event_tClientesEmpleadosMousePressed
 
 
     

@@ -36,19 +36,47 @@ public class Trabajos extends javax.swing.JPanel {
         this.emp = emp;
         tfDireccion.setText(tra.getDir());
         tfCliente.setText(tra.getContratacion().getCliente().toString());
+        dcFecha.setDate(tra.getFecha());
+        
+        load();
         
         List<Empleado> empleados = Conexion.getInstance().getEmpleados();
         DefaultComboBoxModel dcm = new DefaultComboBoxModel();
-        Iterator<Empleado> it = empleados.iterator();
-        while (it.hasNext()) {
-            Empleado next = it.next();
-            if(next.isVigente())
-                dcm.addElement(next);
+        for(Empleado em : empleados){
+            if(em.isVigente())
+                dcm.addElement(em);
         }
-        
         cbEmpleados.setModel(dcm);
     }
-
+    public void load(){
+        Iterator<Trabaja> it = tra.getTrabajos().iterator();
+        DefaultTableModel mdl = (DefaultTableModel) tEmpleados.getModel();
+        while (it.hasNext()) {
+            Trabaja c = it.next();
+            if (c.isVigente()) {  
+                Object[] fila = new Object[5];
+                fila[0] = c.getEmpleado();
+                fila[1] = c;
+                fila[2] = c.isPago();
+                mdl.addRow(fila); 
+            }
+        }
+        List<Empleado> empleados = Conexion.getInstance().getEmpleados();
+        DefaultComboBoxModel dcm = new DefaultComboBoxModel();
+        for(Empleado em : empleados){
+            if(em.isVigente())
+                dcm.addElement(em);
+        }
+        cbEmpleados.setModel(dcm);
+        for(int f = 0; f<tEmpleados.getRowCount();f++){
+            System.out.println("en el for: "+f);
+            cbEmpleados.removeItem(tEmpleados.getValueAt(f, 0));
+            System.out.println(tEmpleados.getValueAt(f, 0));
+        }
+    }
+    public void cargarTabla(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,6 +118,11 @@ public class Trabajos extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tEmpleados);
 
         btnQuitar.setText("Quitar");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +274,7 @@ public class Trabajos extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        if(cbEmpleados.getSelectedItem()!=null && (int) sSueldo.getValue() != 0){
+        if(cbEmpleados.getSelectedItem()!=null){
             Trabaja traba = new Trabaja((Empleado)cbEmpleados.getSelectedItem(),tra,(int)sSueldo.getValue(),false,true);
             Conexion.getInstance().persist(traba);
             Empleado em = (Empleado) cbEmpleados.getSelectedItem();
@@ -251,13 +284,32 @@ public class Trabajos extends javax.swing.JPanel {
             fila[1] = traba;
             fila[2] = traba.isPago();
             mdl.addRow(fila);
+            sSueldo.setValue(0);
+            cbEmpleados.removeItem(cbEmpleados.getSelectedItem());
         }
          
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(tEmpleados.getSelectedRowCount()==1){
+            Trabaja tra = (Trabaja) tEmpleados.getValueAt(tEmpleados.getSelectedRow(), 1);
+            tra.setPago(true);
+            Conexion.getInstance().merge(tra);
+            cargarTabla();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        if(tEmpleados.getSelectedRowCount()==1){
+            cbEmpleados.addItem((Empleado) tEmpleados.getValueAt(tEmpleados.getSelectedRow(), 0));
+            Trabaja tra = (Trabaja) tEmpleados.getValueAt(tEmpleados.getSelectedRow(), 1);
+            tra.setVigente(false);
+            Conexion.getInstance().merge(tra);
+            ((DefaultTableModel)tEmpleados.getModel()).removeRow(tEmpleados.getSelectedRow());
+        }
+    }//GEN-LAST:event_btnQuitarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,7 +318,7 @@ public class Trabajos extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnQuitar;
-    private javax.swing.JComboBox<String> cbEmpleados;
+    private javax.swing.JComboBox<Object> cbEmpleados;
     private com.toedter.calendar.JDateChooser dcFecha;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;

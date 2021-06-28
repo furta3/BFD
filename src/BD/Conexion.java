@@ -87,7 +87,7 @@ public class Conexion {
         }
     }
 
-    public List<Clientes> listaEspecies() {
+    public List<Clientes> getClientes() {
         EntityManager em = getEntity();
         List<Clientes> lista = null;
         em.getTransaction().begin();
@@ -108,7 +108,7 @@ public class Conexion {
         List<Empleado> lista = null;
         em.getTransaction().begin();
         try {
-            lista = em.createNativeQuery("SELECT persona.* FROM persona, empleado WHERE persona.Id = empleado.Id ORDER BY nombre ASC", Empleado.class).getResultList();
+            lista = em.createNativeQuery("SELECT * FROM persona,empleado WHERE persona.Id = empleado.Id ORDER BY nombre ASC", Empleado.class).getResultList();
             em.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,9 +161,9 @@ public class Conexion {
     }
     
 
-    public List<Clientes> listaEmpleado() {
+    public List<Empleado> listaEmpleado() {
         EntityManager em = getEntity();
-        List<Clientes> lista = null;
+        List<Empleado> lista = null;
         em.getTransaction().begin();
         try {
             lista = em.createNativeQuery("SELECT * FROM persona, empleado WHERE persona.Id = empleado.Id ORDER BY nombre ASC", Empleado.class).getResultList();
