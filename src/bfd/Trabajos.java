@@ -40,6 +40,9 @@ public class Trabajos extends javax.swing.JPanel {
         
         load();
         
+    }
+    public void load(){
+        cargarTabla();
         List<Empleado> empleados = Conexion.getInstance().getEmpleados();
         DefaultComboBoxModel dcm = new DefaultComboBoxModel();
         for(Empleado em : empleados){
@@ -47,10 +50,15 @@ public class Trabajos extends javax.swing.JPanel {
                 dcm.addElement(em);
         }
         cbEmpleados.setModel(dcm);
+        for(int f = 0; f<tEmpleados.getRowCount();f++){
+            cbEmpleados.removeItem(tEmpleados.getValueAt(f, 0));
+        }
     }
-    public void load(){
+    public void cargarTabla(){
+        Conexion.getInstance().refresh(tra);
         Iterator<Trabaja> it = tra.getTrabajos().iterator();
         DefaultTableModel mdl = (DefaultTableModel) tEmpleados.getModel();
+        mdl.setColumnCount(0);
         while (it.hasNext()) {
             Trabaja c = it.next();
             if (c.isVigente()) {  
@@ -61,21 +69,6 @@ public class Trabajos extends javax.swing.JPanel {
                 mdl.addRow(fila); 
             }
         }
-        List<Empleado> empleados = Conexion.getInstance().getEmpleados();
-        DefaultComboBoxModel dcm = new DefaultComboBoxModel();
-        for(Empleado em : empleados){
-            if(em.isVigente())
-                dcm.addElement(em);
-        }
-        cbEmpleados.setModel(dcm);
-        for(int f = 0; f<tEmpleados.getRowCount();f++){
-            System.out.println("en el for: "+f);
-            cbEmpleados.removeItem(tEmpleados.getValueAt(f, 0));
-            System.out.println(tEmpleados.getValueAt(f, 0));
-        }
-    }
-    public void cargarTabla(){
-        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -298,6 +291,7 @@ public class Trabajos extends javax.swing.JPanel {
             Conexion.getInstance().merge(tra);
             cargarTabla();
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed

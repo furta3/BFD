@@ -105,8 +105,8 @@ public class GUIContratacion extends javax.swing.JPanel {
             }
         ));
         tTrabajos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tTrabajosMouseClicked(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tTrabajosMousePressed(evt);
             }
         });
         jScrollPane4.setViewportView(tTrabajos);
@@ -286,7 +286,7 @@ public class GUIContratacion extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNuevoPagoActionPerformed
 
     public void load(){
-        tfCliente.setText(con.getCliente().getApellido());
+        tfCliente.setText(con.getCliente().toString());
         dcFecha.setDate(con.getFecha());
         taDesc.setText(con.getDescripcion());
         sPresupuesto.setValue(con.getPresupuesto());
@@ -367,14 +367,13 @@ public class GUIContratacion extends javax.swing.JPanel {
         main.AbrirAltaTrabajo(at);
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
-    private void tTrabajosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tTrabajosMouseClicked
+    private void tTrabajosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tTrabajosMousePressed
         // TODO add your handling code here:
-        
         if(tTrabajos.getSelectedRowCount()==1){
             Trabajos tra = new Trabajos(main,con,null,(Trabajo) tTrabajos.getValueAt(tTrabajos.getSelectedRow(), 0));
             main.AbrirTrabajo(tra);
         }
-    }//GEN-LAST:event_tTrabajosMouseClicked
+    }//GEN-LAST:event_tTrabajosMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
