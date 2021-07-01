@@ -70,7 +70,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
-        btnNuevoTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BotonNuevoTrabajo.png"))); // NOI18N
+        btnNuevoTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_botonNuevaContratacion.png"))); // NOI18N
         btnNuevoTrabajo.setBorder(null);
         btnNuevoTrabajo.setBorderPainted(false);
         btnNuevoTrabajo.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnSerEveLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BotonServiciosEventosLocalidades.png"))); // NOI18N
+        btnSerEveLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_botonEventosServicios_1.png"))); // NOI18N
         btnSerEveLoc.setBorder(null);
         btnSerEveLoc.setBorderPainted(false);
         btnSerEveLoc.addActionListener(new java.awt.event.ActionListener() {
