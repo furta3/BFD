@@ -58,7 +58,7 @@ public class Trabajos extends javax.swing.JPanel {
         Conexion.getInstance().refresh(tra);
         Iterator<Trabaja> it = tra.getTrabajos().iterator();
         DefaultTableModel mdl = (DefaultTableModel) tEmpleados.getModel();
-        mdl.setColumnCount(0);
+        mdl.setRowCount(0);
         while (it.hasNext()) {
             Trabaja c = it.next();
             if (c.isVigente()) {  
