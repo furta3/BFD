@@ -90,6 +90,7 @@ public class GUIContratacion extends javax.swing.JPanel {
 
         btnEliminarTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_btnEliminar-1.png"))); // NOI18N
         btnEliminarTrabajo.setBorder(null);
+        btnEliminarTrabajo.setContentAreaFilled(false);
         btnEliminarTrabajo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarTrabajoActionPerformed(evt);
@@ -119,6 +120,7 @@ public class GUIContratacion extends javax.swing.JPanel {
 
         btnGuardarPresupuesto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_btnGuardar.png"))); // NOI18N
         btnGuardarPresupuesto.setBorder(null);
+        btnGuardarPresupuesto.setContentAreaFilled(false);
         btnGuardarPresupuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarPresupuestoActionPerformed(evt);
@@ -127,8 +129,9 @@ public class GUIContratacion extends javax.swing.JPanel {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/lblInformacion.png"))); // NOI18N
 
-        btnNuevoTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_btnAceptar.png"))); // NOI18N
+        btnNuevoTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/c_btnGuardar.png"))); // NOI18N
         btnNuevoTrabajo.setBorder(null);
+        btnNuevoTrabajo.setContentAreaFilled(false);
         btnNuevoTrabajo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoTrabajoActionPerformed(evt);
@@ -141,6 +144,7 @@ public class GUIContratacion extends javax.swing.JPanel {
 
         btnNuevoPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_btnNuevo.png"))); // NOI18N
         btnNuevoPago.setBorder(null);
+        btnNuevoPago.setContentAreaFilled(false);
         btnNuevoPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoPagoActionPerformed(evt);
@@ -161,6 +165,7 @@ public class GUIContratacion extends javax.swing.JPanel {
 
         btnEliminarPago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_btnEliminar.png"))); // NOI18N
         btnEliminarPago.setBorder(null);
+        btnEliminarPago.setContentAreaFilled(false);
         btnEliminarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarPagoActionPerformed(evt);

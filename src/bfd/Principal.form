@@ -107,7 +107,7 @@
         <Component class="javax.swing.JButton" name="btnNuevoTrabajo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/BotonNuevoTrabajo.png"/>
+              <Image iconType="3" name="/Images/p_botonNuevaContratacion.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -149,7 +149,7 @@
         <Component class="javax.swing.JButton" name="btnSerEveLoc">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Images/BotonServiciosEventosLocalidades.png"/>
+              <Image iconType="3" name="/Images/p_botonEventosServicios_1.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
