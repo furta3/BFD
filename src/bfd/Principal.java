@@ -70,7 +70,7 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(36, 36, 36));
 
-        btnNuevoTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BotonNuevoTrabajo.png"))); // NOI18N
+        btnNuevoTrabajo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_botonNuevaContratacion.png"))); // NOI18N
         btnNuevoTrabajo.setBorder(null);
         btnNuevoTrabajo.setBorderPainted(false);
         btnNuevoTrabajo.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +97,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btnSerEveLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/BotonServiciosEventosLocalidades.png"))); // NOI18N
+        btnSerEveLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/p_botonEventosServicios_1.png"))); // NOI18N
         btnSerEveLoc.setBorder(null);
         btnSerEveLoc.setBorderPainted(false);
         btnSerEveLoc.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +113,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,12 +123,12 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnContrataciones, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNuevoTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(41, 41, 41)
                 .addComponent(iconoBFD)
                 .addGap(31, 31, 31)
                 .addComponent(btnNuevoTrabajo, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +138,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSerEveLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jPanel1.setLayout(new java.awt.CardLayout());
@@ -150,7 +150,8 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,12 +173,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevoTrabajoActionPerformed
 
     private void btnContratacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContratacionesActionPerformed
-        contrataciones = new Contrataciones(this);
-        contrataciones.setVisible(true);
-        jPanel1.removeAll();
-        jPanel1.add(contrataciones);
-        jPanel1.repaint();
-        jPanel1.revalidate();
+        AbrirContrataciones(new Contrataciones(this));
     }//GEN-LAST:event_btnContratacionesActionPerformed
 
     private void btnSerEveLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSerEveLocActionPerformed
@@ -252,6 +248,15 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.removeAll();
         jPanel1.add(con);
         jPanel1.setVisible(true);
+        jPanel1.repaint();
+        jPanel1.revalidate();
+    }
+    
+    public static void AbrirContrataciones(Contrataciones ctras){
+        contrataciones = ctras;
+        contrataciones.setVisible(true);
+        jPanel1.removeAll();
+        jPanel1.add(contrataciones);
         jPanel1.repaint();
         jPanel1.revalidate();
     }
