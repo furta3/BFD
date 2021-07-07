@@ -113,7 +113,7 @@ public class AltaPago extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -147,12 +147,13 @@ public class AltaPago extends javax.swing.JPanel {
         Conexion.getInstance().persist(p);
         FR.cargarPagos();
         
-        this.setVisible(false);//no se como cerrar ventanas
+        //this.setVisible(false);//no se como cerrar ventanas
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);//no se como cerrar ventanas
+        //this.setVisible(false);//no se como cerrar ventanas
     }//GEN-LAST:event_btnCancelarActionPerformed
 
 
