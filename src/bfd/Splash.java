@@ -37,7 +37,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
         jLabel1.setSize(1280, 720);
         jLabel1.setLocation(0, 0);
         tiempo = new Thread(this);
-        Conexion.getInstance();
+        //Conexion.getInstance();
         tiempo.start();
     }
 

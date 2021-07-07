@@ -41,7 +41,7 @@ public class DetallesEmpleado extends javax.swing.JPanel {
         DefaultTableModel mdl = (DefaultTableModel) tTrabajos.getModel();
         while (it.hasNext()) {
             Trabaja c = it.next();
-            if (c.getTrabajo().isVigente()) {  
+            if (c.isVigente()) {  
                 Object[] fila = new Object[4];
                 fila[0] = c.getTrabajo();
                 fila[1] = c.getTrabajo().getContratacion().getCliente();
