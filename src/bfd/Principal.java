@@ -266,6 +266,12 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.add(contrataciones);
         jPanel1.repaint();
         jPanel1.revalidate();
+        
+    }
+    public static void vaciarVista(){
+        jPanel1.removeAll();
+        jPanel1.repaint();
+        jPanel1.revalidate();
     }
     
     

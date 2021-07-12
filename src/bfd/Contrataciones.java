@@ -24,7 +24,7 @@ public class Contrataciones extends javax.swing.JPanel {
             if (c.isVigente()) {  
                 Object[] fila = new Object[5];
                 fila[0] = sdf.format(c.getFecha());
-                fila[1] = c.getCliente().getApellido();
+                fila[1] = c.getCliente();
                 fila[2] = c.getCantPersonas();
                 fila[3] = c.getPresupuesto();
                 fila[4] = c;
@@ -38,9 +38,7 @@ public class Contrataciones extends javax.swing.JPanel {
             Iterator<Contratacion> it = Conexion.getInstance().getContrataciones().iterator();
             DefaultTableModel mdl = (DefaultTableModel) tContrataciones.getModel();
             mdl.setRowCount(0);
-            System.out.println("en el priemr if");
             while (it.hasNext()) {
-                System.out.println("en el while");
                 Contratacion c = it.next();
                 if (c.isVigente() && (
                         c.getCliente().getNombre().contains(buscar) || 
@@ -48,10 +46,9 @@ public class Contrataciones extends javax.swing.JPanel {
                         c.getFecha().toString().contains(buscar) ||
                         c.getDescripcion().contains(buscar)
                         )) {  
-                    System.out.println("en el if");
                     Object[] fila = new Object[5];
                     fila[0] = sdf.format(c.getFecha());
-                    fila[1] = c.getCliente().getApellido();
+                    fila[1] = c.getCliente();
                     fila[2] = c.getCantPersonas();
                     fila[3] = c.getPresupuesto();
                     fila[4] = c;

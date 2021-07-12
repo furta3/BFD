@@ -29,7 +29,10 @@ public class AltaContratacion extends javax.swing.JPanel {
         cli = Conexion.getInstance().getClientes();
         DefaultComboBoxModel dcm = new DefaultComboBoxModel();
         for(Clientes cliente: cli){
-            dcm.addElement(cliente);
+            if(cliente.isVigente()){
+                dcm.addElement(cliente);
+            }
+            
             //cbClientes.addItem(cliente.getApellido());
         }
         cbClientes.setModel(dcm);
@@ -90,6 +93,11 @@ public class AltaContratacion extends javax.swing.JPanel {
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/nt_btnCancelar.png"))); // NOI18N
         btnCancelar.setContentAreaFilled(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         lError.setForeground(new java.awt.Color(255, 51, 51));
         lError.setText("Llene todos los campos para continuar.");
@@ -211,6 +219,11 @@ public class AltaContratacion extends javax.swing.JPanel {
         lError.setVisible(true);
 
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        main.vaciarVista();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
